@@ -12,6 +12,6 @@
 public class HelthMain
 {
     public static void main(String[] args) {
-        
+        System.out.println(RecipeGetter.x);
     }
 }
