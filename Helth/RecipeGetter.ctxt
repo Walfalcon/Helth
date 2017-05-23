@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=user
-comment0.target=RecipeGetter(User)
+comment0.params=
+comment0.target=RecipeGetter()
 comment0.text=\r\n\ Constructor\ for\ RecipeGetter.\ It's\ passed\ user,\ and\ set's\ it's\ own\ user\ object\ to\ the\ same\ thing.\ \r\n\ It\ also\ set's\ the\ URL\r\n
 comment1.params=
 comment1.target=void\ reader()

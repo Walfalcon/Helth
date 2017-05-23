@@ -10,21 +10,21 @@ import java.util.ArrayList;
 public class RecipeGetter
 {
     private URL recipeSite;   //The website we're getting recipes from
-    private User user;  //The user, so we can get their dietary preferences
+    //private User user;  //The user, so we can get their dietary preferences
     
     private enum Nav {  //to be used by the input method
-        BACK, NEXT;
+        YES, NO, EXIT;
     }
     
     /**
      * Constructor for RecipeGetter. It's passed user, and set's it's own user object to the same thing. 
      * It also set's the URL
      */
-    public RecipeGetter(User user)
+    public RecipeGetter(/*User user*/)
     {
-        this.user = user;
+     //   this.user = user;
         try {
-            URL recipeSite = new URL("http://allrecipes.com");
+            recipeSite = new URL("http://allrecipes.com");
         }
         catch (MalformedURLException e) {
             System.out.println("Whoops, looks like we can't get you any recipes! Sorry about that!");
@@ -37,7 +37,7 @@ public class RecipeGetter
     public void reader() throws Exception
     {
         Scanner key = new Scanner(System.in);   //gets keyboard input
-        String dietPref = user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
+        String dietPref = "veganGains";//user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
         ArrayList<String> keyword = new ArrayList<String>();  //Where we're going to put the keywords
         ArrayList<String> incl = new ArrayList<String>();  //Where we're going to put the ingredients to include
         ArrayList<String> excl = new ArrayList<String>();  //Where we're going to put the ingredients to exclude
@@ -105,11 +105,62 @@ public class RecipeGetter
             appendUrl += "&";
         }
         
+        URL search; //get the search page
         try {
-            URL search = new URL(recipeSite + "/search/results/?" + appendUrl + "sort=re");
+            search = new URL(recipeSite, "/search/results/?" + appendUrl + "sort=re");
         }
         catch (MalformedURLException e) {
             System.out.println("Whoops, looks like we can't get you any recipes! Sorry about that!");
-       }
+            return;
+        }
+        
+        
+        System.out.println("\n\n------------Recipes------------\n\n");
+        /*
+         * Now actually reading from the website
+         */
+        BufferedReader input = new BufferedReader(new InputStreamReader(search.openStream())); //create a BufferedReader to be more efficient
+        
+        String currentLine = input.readLine();
+        URL recipePage;
+        BufferedReader recipeIn;
+        String recipe = "";
+        
+        //each loop is one recipe
+        while(currentLine != null) {
+            while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
+            
+            //Get the page of the recipe
+            recipePage = new URL(recipeSite, currentLine.substring(currentLine.indexOf("/recipe/"), currentLine.indexOf("/\"") +1));
+
+            //Now get the description
+            while(currentLine.indexOf("alt=") != -1) currentLine = input.readLine();
+            System.out.println(currentLine.substring(currentLine.indexOf("alt="), currentLine.indexOf("\" title=")));
+            System.out.println("Do you want to view this recipe?(Yes, No, or Exit)");
+            
+            switch(input()) {
+                case EXIT:
+                    System.out.println("Exiting...");
+                    return;
+                case NEXT:
+                    while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
+                    input.readLine();
+                    break;
+                case SELECT:
+                    recipeIn = new BufferedReader(new InputStreamReader(recipePage.openStream()));
+                    String recipeLine;
+                    
+                    while((recipeLine = recipeIn.readLine()).indexOf("itemprop=\"name\">") != -1);
+                    
+                    recipe = recipeLine.substring(recipeLine.indexOf("name\">") + 6, recipeLine.indexOf("</h1>")) + "\n\n";
+                    
+                    recipe += "Ingredients- \n\n";
+                    while(currentLine.indexOf("\"ingredients\"") == -1) {
+                        
+                    }
+            }
+        }
+        
+        input.close(); //finito!
     }
 }
