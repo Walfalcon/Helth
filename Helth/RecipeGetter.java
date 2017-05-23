@@ -44,13 +44,13 @@ public class RecipeGetter
         
         //get all the ingredients the user wants to cook with
         System.out.println("Are there any ingredients you want to add? (Type \"done\" when you're done adding ingredients)");
-   /*     String tempIn; //string for storing input
+        String tempIn; //string for storing input
         while(true) {
             tempIn = key.nextLine();
             if(tempIn.toLowerCase().equals("done")) break;  //exits the loop
             
             incl.add(tempIn.replace(" ", "%20"));
-        }*/
+        }
         
         //get all the dietary preferences
         if(dietPref.indexOf("lactose intolerent") != -1) {
