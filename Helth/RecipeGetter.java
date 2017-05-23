@@ -105,11 +105,11 @@ public class RecipeGetter
             appendUrl += "&";
         }
         
-       // try {
+        try {
             URL search = new URL(recipeSite + "/search/results/?" + appendUrl + "sort=re");
-     //   }
-     //   catch (MalformedURLException e) {
-    //        System.out.println("Whoops, looks like we can't get you any recipes! Sorry about that!");
-     //  }
+        }
+        catch (MalformedURLException e) {
+            System.out.println("Whoops, looks like we can't get you any recipes! Sorry about that!");
+       }
     }
 }
