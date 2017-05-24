@@ -134,33 +134,79 @@ public class RecipeGetter
             recipePage = new URL(recipeSite, currentLine.substring(currentLine.indexOf("/recipe/"), currentLine.indexOf("/\"") +1));
 
             //Now get the description
-            while(currentLine.indexOf("alt=") != -1) currentLine = input.readLine();
+            while(currentLine.indexOf("alt=") == -1) currentLine = input.readLine();
             System.out.println(currentLine.substring(currentLine.indexOf("alt="), currentLine.indexOf("\" title=")));
-            System.out.println("Do you want to view this recipe?(Yes, No, or Exit)");
+            System.out.println("Do you want to view this recipe?(VIEW, NEXT, or EXIT)");
             
-            switch(input()) {
+            switch(input("VIEW", "NEXT", "EXIT")) {
                 case EXIT:
                     System.out.println("Exiting...");
                     return;
-                case NEXT:
+                case NO:
                     while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
                     input.readLine();
                     break;
-                case SELECT:
+                case YES:
                     recipeIn = new BufferedReader(new InputStreamReader(recipePage.openStream()));
                     String recipeLine;
                     
-                    while((recipeLine = recipeIn.readLine()).indexOf("itemprop=\"name\">") != -1);
+                    while((recipeLine = recipeIn.readLine()).indexOf("itemprop=\"name\">") == -1);
                     
                     recipe = recipeLine.substring(recipeLine.indexOf("name\">") + 6, recipeLine.indexOf("</h1>")) + "\n\n";
                     
+                    //Add the ingredients
                     recipe += "Ingredients- \n\n";
-                    while(currentLine.indexOf("\"ingredients\"") == -1) {
-                        
+                    while(recipeLine.indexOf("Add all ingredients to list") == -1) {
+                        while((recipeLine = recipeIn.readLine()).indexOf("\"ingredients\"") == -1);
+                        recipe += recipeLine.substring(recipeLine.indexOf(">") + 1, recipeLine.indexOf("</")) + "\n";
                     }
+                    
+                    //Get the number of servings
+                    while((recipeLine = recipeIn.readLine()).indexOf("Original recipe yields") == -1);
+                    recipe += "\nServings: " + recipeLine.substring(recipeLine.indexOf("ds") + 3, recipeLine.indexOf(" s"));
+                    
+                    //Get the nutrition. I could use a loop, but I won't.
+                    recipe += "\n\nNutrition:\nCalories: ";
+                    while((recipeLine = recipeIn.readLine()).indexOf("\"calories\"") == -1);
+                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " kcal\nFat: ";
+                    while((recipeLine = recipeIn.readLine()).indexOf("\"fatContent\"") == -1);
+                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nCarbs: ";
+                    while((recipeLine = recipeIn.readLine()).indexOf("hydrateContent\"") == -1);
+                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nProtein: ";
+                    while((recipeLine = recipeIn.readLine()).indexOf("roteinContent\"") == -1);
+                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nCholesterol: ";
+                    while((recipeLine = recipeIn.readLine()).indexOf("rolContent\"") == -1);
+                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " mg\nSodium: ";
+                    while((recipeLine = recipeIn.readLine()).indexOf("umContent\"") == -1);
+                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " mg\n";
+                    
+                    //Get the instructions!
+                    recipe += "\n\nDirections\n";
+                    while((recipeLine = recipeIn.readLine()).indexOf("stepIsActive") == -1);
+                    while(recipeLine.indexOf("</ol>") == -1) {
+                        recipe += "\n" + recipeLine.substring(recipeLine.indexOf("m\">") + 3, recipeLine.indexOf("</span>"));
+                    }
+                    
+                    System.out.println(recipe);
             }
         }
         
         input.close(); //finito!
     }
-}
+    
+    public Nav input(String exit, String no, String yes) {
+        Scanner key = new Scanner(System.in);
+        String in;
+        while(true) {
+            in = key.next();
+            if(in.equals(exit))
+                return Nav.EXIT;
+            else if(in.equals(no))
+                return Nav.NO;
+            else if(in.equals(yes))
+                return Nav.YES;
+            else
+                System.out.println("Type " + yes + ", " + no + ", or " + exit + ".");
+            }
+        }
+    }
