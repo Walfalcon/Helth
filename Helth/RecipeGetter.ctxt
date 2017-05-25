@@ -5,6 +5,6 @@ comment0.text=\r\n\ Constructor\ for\ RecipeGetter.\ It's\ passed\ user,\ and\ s
 comment1.params=
 comment1.target=void\ reader()
 comment1.text=\r\n\ The\ method\ for\ reading\ the\ website.\ Gets\ recipes\ based\ on\ user's\ dietary\ preferences\r\n
-comment2.params=exit\ no\ yes
+comment2.params=yes\ no\ exit
 comment2.target=RecipeGetter.Nav\ input(java.lang.String,\ java.lang.String,\ java.lang.String)
 numComments=3
