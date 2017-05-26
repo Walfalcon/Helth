@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class RecipeGetter
 {
     private URL recipeSite;   //The website we're getting recipes from
-    //private User user;  //The user, so we can get their dietary preferences
+    private User user;  //The user, so we can get their dietary preferences
     
     private enum Nav {  //to be used by the input method
         YES, NO, EXIT;
@@ -22,7 +22,7 @@ public class RecipeGetter
      */
     public RecipeGetter(/*User user*/)
     {
-     //   this.user = user;
+        this.user = user;
         try {
             recipeSite = new URL("http://allrecipes.com");
         }
@@ -37,7 +37,7 @@ public class RecipeGetter
     public void reader() throws Exception
     {
         Scanner key = new Scanner(System.in);   //gets keyboard input
-        String dietPref = "veganGains";//user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
+        String dietPref = user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
         ArrayList<String> keyword = new ArrayList<String>();  //Where we're going to put the keywords
         ArrayList<String> incl = new ArrayList<String>();  //Where we're going to put the ingredients to include
         ArrayList<String> excl = new ArrayList<String>();  //Where we're going to put the ingredients to exclude

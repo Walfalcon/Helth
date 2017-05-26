@@ -39,7 +39,7 @@ public class User
         this.age = age;
     }
     
-    public int getAge(int age)
+    public int getAge()
     {
         return this.age;
     }
@@ -49,7 +49,7 @@ public class User
         this.age = age;
     }
     
-    public int getWeight(int weight)
+    public int getWeight()
     {
         return this.weight;
     }
@@ -59,7 +59,7 @@ public class User
         this.height = height;
     }
     
-    public int getHeight(int height)
+    public int getHeight()
     {
         return this.height;
     }
@@ -69,7 +69,7 @@ public class User
         this.dietaryPref = dietaryPref;
     }
     
-    public String getDietaryPref(String dietaryPref)
+    public String getDietaryPref()
     {
         return this.dietaryPref;
     }
@@ -79,7 +79,7 @@ public class User
         this.activity = activity;
     }
     
-    public String getActivity(String activity)
+    public String getActivity()
     {
         return this.activity;
     }
@@ -89,7 +89,7 @@ public class User
         this.sex = sex;
     }
     
-    public String getSex(String sex)
+    public String getSex()
     {
         return this.sex;
     }
