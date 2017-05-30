@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=FoodGroup()
+comment1.params=age\ sex
+comment1.target=void\ setAmtNeeded(int,\ java.lang.String)
+comment2.params=servNeeded\ additServe
+comment2.target=java.lang.String\ getAmtNeeded(double,\ double)
+comment3.params=servEaten
+comment3.target=java.lang.String\ amtRemain(double)
+comment4.params=grams
+comment4.target=void\ calcEaten(java.util.ArrayList)
+comment5.params=servEaten
+comment5.target=void\ setServEaten(double)
+numComments=6
