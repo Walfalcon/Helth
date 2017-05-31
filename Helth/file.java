@@ -31,8 +31,8 @@ public class file {
         System.out.println("Read a line: " + firstLine); */
         try {
             Scanner input = new Scanner(file);
-            String username = in.nextLine();
-            String password = in.nextLine();
+            String username = input.nextLine();
+            String password = input.nextLine();
             
             System.out.printf("Username: %s Password: %d\n",username,password);
         }
