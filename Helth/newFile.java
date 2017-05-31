@@ -9,9 +9,10 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 
-public class file {
+public class newFile {
     public static void main(String[] args) throws IOException {
         File file = new File("Login.txt");
         System.out.println("We got a file: " + file);
@@ -24,20 +25,21 @@ public class file {
         outStream.write(contentsToWrite.getBytes());
         outStream.close();
         
-        /*BufferedReader reader = new BufferedReader(new InputStreamReader(
+       BufferedReader reader = new BufferedReader(new InputStreamReader(
                  new FileInputStream(file)));
         String firstLine = reader.readLine();
         reader.close();
-        System.out.println("Read a line: " + firstLine); */
+        System.out.println("Read a line: " + firstLine); 
+        
+        String string = "Save.";
         try {
-            Scanner input = new Scanner(file);
-            String username = input.nextLine();
-            String password = input.nextLine();
-            
-            System.out.printf("Username: %s Password: %d\n",username,password);
-        }
-        catch (FileNotFoundException ex) {
-            System.out.printf("ERROR: %s\n", ex);
+            BufferedWriter writer = 
+                          new BufferedWriter ( new FileWriter(".\\Login.txt"));
+                          writer.write(string);
+                          writer.close();
+                        }
+        catch (IOException e){
+            e.printStackTrace();
         }
     }
 }
