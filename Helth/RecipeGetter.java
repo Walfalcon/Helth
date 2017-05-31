@@ -137,7 +137,6 @@ public class RecipeGetter
 
             //Now get the description
             while(currentLine.indexOf("alt=") == -1) currentLine = input.readLine();
-            System.out.println(currentLine);
             System.out.println(currentLine.substring(currentLine.indexOf("alt=") + 5, currentLine.indexOf("\" title=")));
             System.out.println("Do you want to view this recipe?(VIEW, NEXT, or EXIT)");
             
@@ -220,7 +219,7 @@ public class RecipeGetter
                             return;
                         case YES:
                             try {
-                                save = new BufferedWriter(new FileWriter(recipeName.replace(" ", "space") + ".txt"));
+                                save = new BufferedWriter(new FileWriter("recipes\\" + recipeName.replace(" ", "space") + ".txt"));
                                 for(int c = 0; c < recipe.length(); c++/*lol*/) {
                                     if(recipe.charAt(c) == '\n') save.newLine();
                                     else save.write(recipe.charAt(c));
