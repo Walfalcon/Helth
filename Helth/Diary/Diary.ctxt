@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Diary()
+comment1.params=food
+comment1.target=void\ setEntry(java.lang.String)
+comment2.params=entry
+comment2.target=java.lang.String\ getEntry(int)
+numComments=3
