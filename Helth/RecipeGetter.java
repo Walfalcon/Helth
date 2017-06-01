@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class RecipeGetter
 {
     private URL recipeSite;   //The website we're getting recipes from
-    //private User user;  //The user, so we can get their dietary preferences
+    private User user;  //The user, so we can get their dietary preferences
     
     private enum Nav {  //to be used by the input method
         YES, NO, EXIT;
@@ -20,9 +20,9 @@ public class RecipeGetter
      * Constructor for RecipeGetter. It's passed user, and set's it's own user object to the same thing. 
      * It also set's the URL
      */
-    public RecipeGetter(/*User user*/)
+    public RecipeGetter(User user)
     {
-     //   this.user = user;
+        this.user = user;
         try {
             recipeSite = new URL("http://allrecipes.com");
         }
@@ -37,24 +37,24 @@ public class RecipeGetter
     public void reader() throws Exception
     {
         Scanner key = new Scanner(System.in);   //gets keyboard input
-        String dietPref = "veganGains";//user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
+        String dietPref = user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
         ArrayList<String> keyword = new ArrayList<String>();  //Where we're going to put the keywords
         ArrayList<String> incl = new ArrayList<String>();  //Where we're going to put the ingredients to include
         ArrayList<String> excl = new ArrayList<String>();  //Where we're going to put the ingredients to exclude
         BufferedWriter save = null;
         
         //get all the ingredients the user wants to cook with
-        System.out.println("Are there any ingredients you want to add? (Type \"done\" when you're done adding ingredients)");
+    /*    System.out.println("Are there any ingredients you want to add? (Type \"done\" when you're done adding ingredients)");
         String tempIn; //string for storing input
         while(true) {
             tempIn = key.nextLine();
             if(tempIn.toLowerCase().equals("done")) break;  //exits the loop
             
             incl.add(tempIn.replace(" ", "%20"));
-        }
+        }*/
         
         //get all the dietary preferences
-        if(dietPref.indexOf("lactose intolerent") != -1) {
+        if(dietPref.contains("lactose intolerent")) {
             excl.add("cream");
             excl.add("milk");
             excl.add("cheese");
@@ -63,10 +63,10 @@ public class RecipeGetter
             excl.add("curds");
             excl.add("whey");
         }
-        if(dietPref.indexOf("vegan") != -1) {
+        if(dietPref.contains("vegan")) {
             keyword.add("vegan");
         }
-        if(dietPref.indexOf("vegetarian") != -1) {
+        if(dietPref.contains("vegetarian")) {
             keyword.add("vegetarian");
         }
         
@@ -127,10 +127,18 @@ public class RecipeGetter
         BufferedReader recipeIn;
         String recipeName;
         String recipe = "";
-        
         //each loop is one recipe
         while(currentLine != null) {
-            while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
+            System.out.println(currentLine);
+            while(currentLine != null && currentLine.indexOf("/recipe/") == -1) {
+                currentLine = input.readLine();
+            }
+            
+            if(currentLine == null) {
+            System.out.println(currentLine);
+                    System.out.println("That's the last recipe. Returning to main menu.");
+                    break;
+            }
             
             //Get the page of the recipe
             recipePage = new URL(recipeSite, currentLine.substring(currentLine.indexOf("/recipe/"), currentLine.indexOf("/\"") +1));
@@ -143,6 +151,7 @@ public class RecipeGetter
             switch(input("VIEW", "NEXT", "EXIT")) {
                 case EXIT:
                     System.out.println("Exiting...");
+                    input.close();
                     return;
                 case NO:
                     while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
@@ -216,6 +225,8 @@ public class RecipeGetter
                             break;
                         case EXIT:
                             System.out.println("Exiting...");
+                            input.close();
+                            recipeIn.close();
                             return;
                         case YES:
                             try {
@@ -225,14 +236,18 @@ public class RecipeGetter
                                     else save.write(recipe.charAt(c));
                                 }
                                 save.flush();
-                            } finally {
+                                System.out.println("Saved to recipes\\" + recipeName.replace(" ", "space") + ".txt");
+                            } catch(IOException dagnabbit) {
+                                System.out.println("Saving the recipe failed, for some reason. Sorry.");
+                            }finally {
                                 save.close();
                             }
                     }
                     
                     recipeIn.close();
-                    while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
-                    currentLine = input.readLine();
+                    while(currentLine != null && currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
+
+                    currentLine = (currentLine == null) ? null : input.readLine();
             }
         }
         
