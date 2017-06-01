@@ -1,3 +1,5 @@
+package Diary;
+
 import java.util.ArrayList;
 
 public class Dairy extends FoodGroup{

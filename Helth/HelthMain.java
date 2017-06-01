@@ -11,7 +11,13 @@
  */
 public class HelthMain
 {
+    private static User user;
+    private static Diary diary;
+    private static RecipeGetter recipeGet;
+    
     public static void main(String[] args) {
         
     }
+    
+    public static 
 }
