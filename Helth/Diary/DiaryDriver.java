@@ -10,9 +10,7 @@ public class DiaryDriver{
         String name = user.nextLine();
         
         Diary diary = new Diary(name);
-        System.out.println("What did you eat?");
-        String food = user.nextLine();
-        diary.setEntry(food);
+        diary.setEntry();
         System.out.println("Clear?");
         boolean clear = user.nextBoolean();
         if (clear == true){

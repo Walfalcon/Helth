@@ -1,18 +1,18 @@
 package Diary;
 
 import java.util.ArrayList;
+import java.io.*;
 
 public abstract class FoodGroup {
     
-    private ArrayList<String> grouping;
     private double servNeeded;
     private double additServe;
     private ArrayList<Double> grams;
     private double servEaten;
     private double totalServe;
+    private FileWriter groupings;
 
     public FoodGroup(){
-        grouping = new ArrayList<String>();
     }
     
     public abstract void setAmtNeeded(int age, String sex);
