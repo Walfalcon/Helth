@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
 
-public class newFile {
+public class saveUser {
     public static void main(String[] args) throws IOException {
         File file = new File("Login.txt");
         System.out.println("We got a file: " + file);
