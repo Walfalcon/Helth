@@ -1,33 +1,65 @@
-
-/**
- * Write a description of class Login here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+import java.util.Scanner;
 public class Login
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Login
-     */
-    public Login()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+    private static String username;
+    public static void main(String[] args) {
+        //Prompt the user and pick String variables
+     System.out.println("Please choose a username: ");
+     Scanner in = new Scanner(System.in);
+     String username = in.nextLine();
+     System.out.println("Please enter password:\n(Must have 6 characters and at least one non-alphanumeric character @, +, -, *, /)");
+     String password = in.nextLine();
+     System.out.println("Please confirm password: ");
+     String confirm = in.nextLine();     
+     boolean condition;
+     condition = isValid(password);
+  //Create while loop to catch if you typed confirm password in correctly   
+   while (!password.equals(confirm) || (!condition)) {
+         System.out.println("");
+         System.out.println("The password is invalid.");
+         System.out.println("Please enter a password again: ");
+         String Password = in.nextLine();
+         System.out.print("Please re-confirm the password: ");
+         String Confirm = in.nextLine();        
+         if (isValid(password)) {
+             //Print password is invalid if chosen password does not match confirmed password
+            System.out.println( "The password is valid");
+            break;
+        }
+ }       
 }
+public static String getUsername() {
+    return username;
+}
+public static boolean isValid(String password) {
+    //Checks to see if there are any alphanumeric characters in the password
+    System.out.println("");
+    if(password.length() < 6) {
+        //Checks if password is 6 characters or longer
+        System.out.print(""); 
+        return false;
+    } else {
+     for( int i = 0; i < password.length(); i++) {
+             if(password.charAt(i) == '@'){
+                 return true;
+             }
+             else if(password.charAt(i) == '+') {
+                 return true;
+             }
+             else if(password.charAt(i) == '-'){
+                 return true;
+             }
+             else if(password.charAt(i) == '*'){
+                 return true;
+             }
+             else if(password.charAt(i) == '/'){
+                 return true;
+             }
+     }
+     if(!true) {
+                 System.out.println("Must have at least one alphaneumeric character.");                  
+                }
+    }
+            return true;
+        }
+       }
