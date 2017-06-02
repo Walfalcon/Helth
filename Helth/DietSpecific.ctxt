@@ -1,8 +1,10 @@
 #BlueJ class context
-comment0.params=
-comment0.target=DietSpecific()
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ DietSpecific\r\n
-comment1.params=y
-comment1.target=int\ sampleMethod(int)
-comment1.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \r\n
-numComments=2
+comment0.params=dietNeed
+comment0.target=void\ setDietNeed(java.lang.String)
+comment1.params=dietNeed
+comment1.target=java.lang.String\ getDietNeed(java.lang.String)
+comment2.params=foodAllergy
+comment2.target=void\ setFoodAllergy(java.lang.String)
+comment3.params=foodAllergy
+comment3.target=java.lang.String\ getFoodAllergy(java.lang.String)
+numComments=4

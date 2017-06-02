@@ -1,3 +1,5 @@
+package Diary;
+
 import java.util.ArrayList;
 
 public abstract class FoodGroup {
@@ -7,27 +9,29 @@ public abstract class FoodGroup {
     private double additServe;
     private ArrayList<Double> grams;
     private double servEaten;
+    private double totalServe;
 
     public FoodGroup(){
         grouping = new ArrayList<String>();
     }
     
-    public void setGrouping(String food){
-        grouping.add(food);
-    }
-    
     public abstract void setAmtNeeded(int age, String sex);
     
-    public String getAmtNeeded(){
-        return servNeeded + " to " + (servNeeded+additServe) + " servings.";
+    public String getAmtNeeded(double servNeeded, double additServe){
+        return servNeeded + " to " + (servNeeded+additServe) + " servings ";
     }
     
-    public String amtRemain(double totalServe, double servEaten){
+    public String amtRemain(double servEaten){
         totalServe = servNeeded + additServe;
-        return (totalServe - servEaten) + " servings left.";
+        
+        if(totalServe - (servEaten/8.5) > 0){
+            return "You have to eat " + (totalServe - (servEaten/8.5)) + " servings left of";
+        } else {
+            return "No more servings needed.";
+        }
     }
     
-    public abstract double calcEaten(ArrayList<Double> grams);
+    public abstract void calcEaten(ArrayList<Double> grams);
     
     public void setServEaten (double servEaten){
         this.servEaten = servEaten;
