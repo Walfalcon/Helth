@@ -32,7 +32,7 @@ public class RecipeGetter
     }
     
     /**
-     * The method for reading the website. Gets recipes based on user's dietary preferences
+     * The method for reading the website. Gets recipes based on user's dietary preferences, allows the user to save them to a .txt file.
      */
     public void reader() throws Exception
     {
@@ -44,14 +44,14 @@ public class RecipeGetter
         BufferedWriter save = null;
         
         //get all the ingredients the user wants to cook with
-    /*    System.out.println("Are there any ingredients you want to add? (Type \"done\" when you're done adding ingredients)");
+        System.out.println("Are there any ingredients you want to add? (Type \"done\" when you're done adding ingredients)");
         String tempIn; //string for storing input
         while(true) {
             tempIn = key.nextLine();
             if(tempIn.toLowerCase().equals("done")) break;  //exits the loop
             
             incl.add(tempIn.replace(" ", "%20"));
-        }*/
+        }
         
         //get all the dietary preferences
         if(dietPref.contains("lactose intolerent")) {
@@ -148,6 +148,7 @@ public class RecipeGetter
             System.out.println(currentLine.substring(currentLine.indexOf("alt=") + 5, currentLine.indexOf("\" title=")));
             System.out.println("Do you want to view this recipe?(VIEW, NEXT, or EXIT)");
             
+            //Switch, so the user can choose to view the recipe, or just move on to the next one.
             switch(input("VIEW", "NEXT", "EXIT")) {
                 case EXIT:
                     System.out.println("Exiting...");
@@ -217,7 +218,9 @@ public class RecipeGetter
                     recipe = recipe.replace("&amp;", "&");
                     
                     System.out.println("]");
-                    System.out.println(recipe);
+                    System.out.println(recipe); //This is where we actually print out the recipe to the console
+                    
+                    //Now we save it.
                     System.out.println("Do you want to save this recipe, or do you want to see another?(SAVE, NEXT, or EXIT)");
                     switch(input("SAVE", "NEXT", "EXIT")) {
                         case NO:
@@ -230,7 +233,7 @@ public class RecipeGetter
                             return;
                         case YES:
                             try {
-                                save = new BufferedWriter(new FileWriter("recipes\\" + recipeName.replace(" ", "space") + ".txt"));
+                                save = new BufferedWriter(new FileWriter("recipes\\" + recipeName.replace(" ", "space") + ".txt")); //saves to a .txt file in the recipes folder
                                 for(int c = 0; c < recipe.length(); c++/*lol*/) {
                                     if(recipe.charAt(c) == '\n') save.newLine();
                                     else save.write(recipe.charAt(c));
@@ -254,7 +257,10 @@ public class RecipeGetter
         input.close(); //finito!
     }
     
-    public Nav input(String yes, String no, String exit) {
+    /**
+     * Just a simple input method. Gets one of three responses and returns it.
+     */
+    private Nav input(String yes, String no, String exit) {
         Scanner key = new Scanner(System.in);
         String in;
         while(true) {
