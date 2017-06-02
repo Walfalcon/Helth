@@ -2,12 +2,18 @@ import java.util.Scanner;
 public class Login
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static String username;
     public static void main(String[] args) {
         //Prompt the user and pick String variables
 =======
     public static void main(String[] args) {
 >>>>>>> master
+=======
+    private static String username;
+    public static void main(String[] args) {
+        //Prompt the user and pick String variables
+>>>>>>> KyndraBranch
      System.out.println("Please choose a username: ");
      Scanner in = new Scanner(System.in);
      String username = in.nextLine();
@@ -18,10 +24,14 @@ public class Login
      boolean condition;
      condition = isValid(password);
 <<<<<<< HEAD
+<<<<<<< HEAD
   //Create while loop to catch if you typed confirm password in correctly   
 =======
      
 >>>>>>> master
+=======
+  //Create while loop to catch if you typed confirm password in correctly   
+>>>>>>> KyndraBranch
    while (!password.equals(confirm) || (!condition)) {
          System.out.println("");
          System.out.println("The password is invalid.");
@@ -31,14 +41,19 @@ public class Login
          String Confirm = in.nextLine();        
          if (isValid(password)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
              //Print password is invalid if chosen password does not match confirmed password
 =======
 >>>>>>> master
+=======
+             //Print password is invalid if chosen password does not match confirmed password
+>>>>>>> KyndraBranch
             System.out.println( "The password is valid");
             break;
         }
  }       
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 public static String getUsername() {
     return username;
@@ -52,13 +67,24 @@ public static boolean isValid(String password) {
         return false;
     } else {
 =======
+=======
+public static String getUsername() {
+    return username;
+}
+>>>>>>> KyndraBranch
 public static boolean isValid(String password) {
+    //Checks to see if there are any alphanumeric characters in the password
     System.out.println("");
     if(password.length() < 6) {
+        //Checks if password is 6 characters or longer
         System.out.print(""); 
         return false;
+<<<<<<< HEAD
         } else {
 >>>>>>> master
+=======
+    } else {
+>>>>>>> KyndraBranch
      for( int i = 0; i < password.length(); i++) {
              if(password.charAt(i) == '@'){
                  return true;
@@ -76,6 +102,7 @@ public static boolean isValid(String password) {
                  return true;
              }
 <<<<<<< HEAD
+<<<<<<< HEAD
      }
      if(!true) {
                  System.out.println("Must have at least one alphaneumeric character.");                  
@@ -88,6 +115,13 @@ public static boolean isValid(String password) {
                 }
             }
 >>>>>>> master
+=======
+     }
+     if(!true) {
+                 System.out.println("Must have at least one alphaneumeric character.");                  
+                }
+    }
+>>>>>>> KyndraBranch
             return true;
         }
        }
