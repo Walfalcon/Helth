@@ -1,9 +1,6 @@
 import java.io.*;
 
 public abstract class FoodGroup {
-    
-    private double servNeeded;
-    private double additServe;
     private double servEaten;
     private double totalServe;
     private double amtNeeded;
@@ -28,14 +25,13 @@ public abstract class FoodGroup {
                 amtNeeded = servNeeded + (2 * additServe / 3);
                 break;
             case "very active":
-            amtNeeded = servNeeded + additServe;
+                amtNeeded = servNeeded + additServe;
                 break;
         }
         return "Approximately " + amtNeeded + " servings ";
     }
     
     public String amtRemain(double calcEaten){
-        totalServe = servNeeded + additServe;
         
         if(totalServe - (servEaten/8.5) > 0){
             return "You have to eat " + (totalServe - (calcEaten/8.5)) + " servings left of";
