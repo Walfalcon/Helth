@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=group
-comment0.target=Grain(java.lang.String)
+comment0.target=Fat(java.lang.String)
 comment1.params=age\ sex
 comment1.target=void\ setAmtNeeded(int,\ java.lang.String)
 comment2.params=activity

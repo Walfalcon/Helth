@@ -1,6 +1,14 @@
 #BlueJ class context
 comment0.params=args
 comment0.target=void\ main(java.lang.String[])
+<<<<<<< HEAD
+comment1.params=
+comment1.target=java.lang.String\ getUsername()
+comment2.params=password
+comment2.target=boolean\ isValid(java.lang.String)
+numComments=3
+=======
 comment1.params=password
 comment1.target=boolean\ isValid(java.lang.String)
 numComments=2
+>>>>>>> master
