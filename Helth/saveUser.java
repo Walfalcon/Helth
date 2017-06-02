@@ -19,27 +19,30 @@ public class saveUser {
         
         System.out.println("Does it exist? " + file.exists());
         System.out.println("What? " + file.isDirectory());
-        
+        //Determines if a file already exists or not
         String contentsToWrite = "enter username";
+        //Prints out "enter username" on notepad++
         OutputStream outStream = new FileOutputStream(file);
         outStream.write(contentsToWrite.getBytes());
         outStream.close();
         
-       BufferedReader reader = new BufferedReader(new InputStreamReader(
+        //reader is not necessary for this but useful!
+       /*BufferedReader reader = new BufferedReader(new InputStreamReader(
                  new FileInputStream(file)));
         String firstLine = reader.readLine();
         reader.close();
-        System.out.println("Read a line: " + firstLine); 
+        System.out.println("Read a line: " + firstLine); */
         
-        String string = "Save.";
+
         try {
             BufferedWriter writer = 
                           new BufferedWriter ( new FileWriter(".\\Login.txt"));
-                          writer.write(string);
+                          writer.Writer("What is your username?");
                           writer.close();
                         }
         catch (IOException e){
             e.printStackTrace();
+            //Catch any exceptions
         }
     }
 }
