@@ -2,16 +2,20 @@ package Diary;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.util.List;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
-public class Meat extends FoodGroup{
+public class MeatsAndNuts extends FoodGroup{
     
     private double servNeeded;
     private double additServe;
     private double servEaten;
     private double totalServe;
+    private double calcEaten;
     
-    public Meat(){
-        super();
+    public MeatsAndNuts(String group) throws IOException{
+        super(group);
     }
     
     public void setAmtNeeded(int age, String sex){
@@ -80,24 +84,38 @@ public class Meat extends FoodGroup{
     }
     
     public String getAmtNeeded(){
-        return super.getAmtNeeded(servNeeded, additServe) + "of meat.";
+        return super.getAmtNeeded(servNeeded, additServe) + "of meats and nuts.";
     }
     
-    public String amtRemain(double servEaten){
-        return super.amtRemain(servEaten);
+    public String amtRemain(double calcEaten){
+        return super.amtRemain(calcEaten);
     }
     
-    public void calcEaten(ArrayList<Double> grams){
-        for (int i = 0; i < grams.size(); i++){
-            servEaten += grams.get(i);
+    public void calcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get("MeatsAndNuts.txt"));
+        String read = "";
+        calcEaten = 0;
+        double grams;
+        for (int i = 0; i < lines.size(); i++){
+            read = lines.get(i);
+            try{
+                grams = Double.parseDouble(read);
+            } catch (NumberFormatException e){
+                grams = 0;
+            }
+            calcEaten += grams;
         }
     }
     
-    public double getCalcEaten(){
-        return servEaten;
+    public String getCalcEaten() throws IOException{
+        return "Meats and Nuts: " + calcEaten + " grams";
     }
     
-    public void setServEaten (double servEaten){
-        super.setServEaten(servEaten);
+    public void setServEaten (String group, String grams2) throws IOException{
+        super.setServEaten(group, grams2);
+    }
+    
+    public void clearFoodGroup(String group) throws IOException{
+        super.clearFoodGroup(group);
     }
 }
