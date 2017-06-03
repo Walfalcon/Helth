@@ -30,6 +30,7 @@ public class HelthMain
             switch(input()) {
                 case DIARY:
                 System.out.println("Checking priviledge");
+                break;
                 case GET_RECIPE: 
                 try{
                     recipeGet.reader();
@@ -71,12 +72,13 @@ public class HelthMain
                 case 4: return Menu.EXIT;
                 default:
                     if(input > 9000){
-                        for(int i = 0; i <= 9000; i+= 1)
+                        for(int i = 0; i <= 9000; i+= 1){
                         System.out.println("....Please wait, executing stalememes.txt....");
-                        
+                    }
                         System.out.println("done");
-                    } else
+                    } else{
                     System.out.println("That's not an option type one of the actual things.");
+                }
             }
         }
     }
