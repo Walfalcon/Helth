@@ -37,7 +37,7 @@ public class saveUser {
         try {
             BufferedWriter writer = 
                           new BufferedWriter ( new FileWriter(".\\Login.txt"));
-                          writer.Writer("What is your username?");
+                          //writer.Write("What is your username?");
                           writer.close();
                         }
         catch (IOException e){

@@ -23,13 +23,19 @@ public class HelthMain
      * The hub of the program. All the other classes come off of here.
      */
     public static void main(String[] args) {
-        
+        Login.main(new String[0]);
+        user.doWork();
         while(true){
             System.out.println("Do you want to:\n1. View Diary\n2. Get Recipes\n3. Calculate Nutrition\n4. Exit\n(Type a number)");
             
             switch(input()) {
                 case DIARY:
-                System.out.println("Checking priviledge");
+                try{
+                    DiaryDriver.main();
+                } catch(Exception e) {
+                    System.out.println("Diary broke");
+                }
+                break;
                 case GET_RECIPE: 
                 try{
                     recipeGet.reader();
