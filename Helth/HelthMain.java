@@ -44,6 +44,7 @@ public class HelthMain
                 }
                 break;
                 case CALCULATOR:
+                Calculator.whatever();
                 System.out.println("LOL joke's on you there is no calculator!");
                 break;
                 case EXIT:
