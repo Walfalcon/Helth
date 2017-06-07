@@ -35,7 +35,6 @@ public class HelthMain
                 } catch(Exception e) {
                     System.out.println("Diary broke");
                 }
-                System.out.println("Checking priviledge");
                 break;
                 case GET_RECIPE: 
                 try{
