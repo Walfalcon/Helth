@@ -10,23 +10,28 @@ public class Sugar extends FoodGroup{
     private double additServe;
     private double servEaten;
     private double calcEaten;
+    private double amtNeeded;
     private double totalServe;
     
     public Sugar(String group) throws IOException{
         super(group);
     }
     
-    public void setAmtNeeded(int age, String sex){
+    public void setAmtNeeded(int age, String sex, String activi){
         servNeeded = 0;
         additServe = 1;
     }
     
-    public String getAmtNeeded(String activity){
-        return super.getAmtNeeded(servNeeded, additServe, activity) + "of sugar.";
+    public String getAmtNeeded(double amtNeeded){
+        return super.getAmtNeeded(amtNeeded) + "of sugar.";
     }
     
-    public String amtRemain(double calcEaten){
-        return super.amtRemain(calcEaten);
+    public double getNeeded(){
+        return amtNeeded;
+    }
+    
+    public String amtRemain(double amtNeeded, double calcEaten){
+        return super.amtRemain(amtNeeded, calcEaten);
     }
     
     public void calcEaten() throws IOException{
@@ -47,6 +52,10 @@ public class Sugar extends FoodGroup{
     
     public String getCalcEaten() throws IOException{
         return "Sugar: " + calcEaten + " grams";
+    }
+    
+    public double getEaten() throws IOException{
+        return calcEaten;
     }
     
     public void setServEaten (String group, String grams2) throws IOException{

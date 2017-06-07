@@ -10,13 +10,14 @@ public class MeatsAndNuts extends FoodGroup{
     private double additServe;
     private double servEaten;
     private double totalServe;
+    private double amtNeeded;
     private double calcEaten;
     
     public MeatsAndNuts(String group) throws IOException{
         super(group);
     }
     
-    public void setAmtNeeded(int age, String sex){
+    public void setAmtNeeded(int age, String sex, String activity){
         if (age < 2){
             servNeeded = 1;
             additServe = 0;
@@ -79,14 +80,33 @@ public class MeatsAndNuts extends FoodGroup{
             }
         }
         
+        switch (activity){
+            case "sedentary":
+                amtNeeded = servNeeded;
+                break;
+            case "lightly active":
+                amtNeeded = servNeeded + (additServe / 3);
+                break;
+            case "active":
+                amtNeeded = servNeeded + (2 * additServe / 3);
+                break;
+            case "very active":
+                amtNeeded = servNeeded + additServe;
+                break;
+        }
+        
     }
     
-    public String getAmtNeeded(String activity){
-        return super.getAmtNeeded(servNeeded, additServe, activity) + "of meats and nuts.";
+    public String getAmtNeeded(double amtNeeded){
+        return super.getAmtNeeded(amtNeeded) + "of meats and nuts.";
     }
     
-    public String amtRemain(double calcEaten){
-        return super.amtRemain(calcEaten);
+    public String amtRemain(double amtNeeded, double calcEaten){
+        return super.amtRemain(amtNeeded, calcEaten);
+    }
+    
+    public double getNeeded(){
+        return amtNeeded;
     }
     
     public void calcEaten() throws IOException{
@@ -107,6 +127,10 @@ public class MeatsAndNuts extends FoodGroup{
     
     public String getCalcEaten() throws IOException{
         return "Meats and Nuts: " + calcEaten + " grams";
+    }
+    
+    public double getEaten() throws IOException{
+        return calcEaten;
     }
     
     public void setServEaten (String group, String grams2) throws IOException{
