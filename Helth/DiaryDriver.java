@@ -8,7 +8,7 @@ public class DiaryDriver{
         System.out.println("What's your name?");
         String name = user.nextLine();
         Login login = new Login();
-        Diary diary = new Diary(name);
+        Diary diary = new Diary();
         diary.setEntry();
         System.out.println("Clear?");
         boolean clear = user.nextBoolean();
@@ -19,6 +19,7 @@ public class DiaryDriver{
         boolean entry = user.nextBoolean();
         if (entry == true){
             System.out.println(diary.getEntry());
+            System.out.println(diary.dietRec());
         }
         
     }

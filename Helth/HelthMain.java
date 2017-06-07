@@ -23,7 +23,7 @@ public class HelthMain
      * The hub of the program. All the other classes come off of here.
      */
     public static void main(String[] args) {
-        Login.main(new String[0]);
+        Login.signUp();
         user.doWork();
         while(true){
             System.out.println("Do you want to:\n1. View Diary\n2. Get Recipes\n3. Calculate Nutrition\n4. Exit\n(Type a number)");
@@ -35,6 +35,7 @@ public class HelthMain
                 } catch(Exception e) {
                     System.out.println("Diary broke");
                 }
+                System.out.println("Checking priviledge");
                 break;
                 case GET_RECIPE: 
                 try{
@@ -77,12 +78,13 @@ public class HelthMain
                 case 4: return Menu.EXIT;
                 default:
                     if(input > 9000){
-                        for(int i = 0; i <= 9000; i+= 1)
+                        for(int i = 0; i <= 9000; i+= 1){
                         System.out.println("....Please wait, executing stalememes.txt....");
-                        
+                    }
                         System.out.println("done");
-                    } else
+                    } else{
                     System.out.println("That's not an option type one of the actual things.");
+                }
             }
         }
     }

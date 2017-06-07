@@ -11,22 +11,27 @@ public class Fat extends FoodGroup{
     private double servEaten;
     private double totalServe;
     private double calcEaten;
+    private double amtNeeded;
     
     public Fat(String group) throws IOException{
         super(group);
     }
     
-    public void setAmtNeeded(int age, String sex){
+    public void setAmtNeeded(int age, String sex, String activity){
         servNeeded = 2;
         additServe = 1;
     }
     
-    public String getAmtNeeded(String activity){
-        return super.getAmtNeeded(servNeeded, additServe, activity) + "of fat.";
+    public String getAmtNeeded(double amtNeeded){
+        return super.getAmtNeeded(amtNeeded) + "of fat.";
     }
     
-    public String amtRemain(double calcEaten){
-        return super.amtRemain(calcEaten);
+    public double getNeeded(){
+        return amtNeeded;
+    }
+    
+    public String amtRemain(double amtNeeded, double calcEaten){
+        return super.amtRemain(amtNeeded, calcEaten);
     }
     
     public void calcEaten() throws IOException{
@@ -47,6 +52,10 @@ public class Fat extends FoodGroup{
     
     public String getCalcEaten() throws IOException{
         return "Fat: " + calcEaten + " grams";
+    }
+    
+    public double getEaten() throws IOException{
+        return calcEaten;
     }
     
     public void setServEaten (String group, String grams2) throws IOException{
