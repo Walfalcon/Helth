@@ -2,8 +2,6 @@ import java.io.*;
 
 public abstract class FoodGroup {
     private double servEaten;
-    private double totalServe;
-    private double amtNeeded;
     private FileWriter groupings;
     private Login login;
     public FoodGroup(String group) throws IOException{
@@ -11,30 +9,15 @@ public abstract class FoodGroup {
         this.groupings = new FileWriter(group + login.getUsername() + ".txt", true);
     }
     
-    public abstract void setAmtNeeded(int age, String sex);
+    public abstract void setAmtNeeded(int age, String sex, String activity);
     
-    public String getAmtNeeded(double servNeeded, double additServe, String activity){
-        switch (activity){
-            case "sedentary":
-                amtNeeded = servNeeded;
-                break;
-            case "lightly active":
-                amtNeeded = servNeeded + (additServe / 3);
-                break;
-            case "active":
-                amtNeeded = servNeeded + (2 * additServe / 3);
-                break;
-            case "very active":
-                amtNeeded = servNeeded + additServe;
-                break;
-        }
+    public String getAmtNeeded(double amtNeeded){
         return "Approximately " + amtNeeded + " servings ";
     }
     
-    public String amtRemain(double calcEaten){
-        
-        if(totalServe - (servEaten/8.5) > 0){
-            return "You have to eat " + (totalServe - (calcEaten/8.5)) + " servings left of";
+    public String amtRemain(double amtNeeded, double calcEaten){
+        if(amtNeeded - (calcEaten/8.5) > 0){
+            return "You have to eat " + (amtNeeded - (calcEaten/8.5)) + " servings left of";
         } else {
             return "No more servings needed.";
         }

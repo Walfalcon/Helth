@@ -1,3 +1,8 @@
 
+<<<<<<< HEAD
 Sandwich
 Steak
+=======
+Zucchini
+Ice Cream
+>>>>>>> 1efb81dea9f225deff18ae9dfe17beb6cf750064

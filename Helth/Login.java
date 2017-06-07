@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Login
 {
     private static String username;
-    public static void main(String[] args) {
+    public static void signUp(){
         //Prompt the user and pick String variables
      System.out.println("Please choose a username: ");
      Scanner in = new Scanner(System.in);
@@ -31,35 +31,36 @@ public class Login
 public static String getUsername() {
     return username;
 }
-public static boolean isValid(String password) {
-    //Checks to see if there are any alphanumeric characters in the password
-    System.out.println("");
-    if(password.length() < 6) {
-        //Checks if password is 6 characters or longer
-        System.out.print(""); 
-        return false;
+
+    public static boolean isValid(String password) {
+        //Checks to see if there are any alphanumeric characters in the password
+        System.out.println("");
+        if(password.length() < 6) {
+            //Checks if password is 6 characters or longer
+            System.out.print(""); 
+            return false;
         } else {
-     for( int i = 0; i < password.length(); i++) {
-             if(password.charAt(i) == '@'){
-                 return true;
-             }
-             else if(password.charAt(i) == '+') {
-                 return true;
-             }
-             else if(password.charAt(i) == '-'){
-                 return true;
-             }
-             else if(password.charAt(i) == '*'){
-                 return true;
-             }
-             else if(password.charAt(i) == '/'){
-                 return true;
-             }
-     }
-     if(!true) {
-                 System.out.println("Must have at least one alphaneumeric character.");                  
+            for( int i = 0; i < password.length(); i++) {
+                if(password.charAt(i) == '@'){
+                    return true;
                 }
-    }
-            return true;
+                else if(password.charAt(i) == '+') {
+                    return true;
+                }
+                else if(password.charAt(i) == '-'){
+                    return true;
+                }
+                else if(password.charAt(i) == '*'){
+                    return true;
+                }
+                else if(password.charAt(i) == '/'){
+                    return true;
+                }
+            }
+            if(!true) {
+                System.out.println("Must have at least one alphaneumeric character.");                  
+            }
         }
-       }
+        return true;
+    }
+}

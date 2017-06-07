@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 
 public class Diary{
     
+    //all the variables: foodgroups mainly
     private String fileName;
     private Scanner user;
     private FileWriter diary;
@@ -19,7 +20,8 @@ public class Diary{
     private Sugar sugar;
     private Login login;
     
-    public Diary(String username) throws IOException{
+    //creates each foodgroup and creates a diary
+    public Diary() throws IOException{
         this.login = new Login();
         this.fileName = "diary" + login.getUsername() + ".txt";
         this.user = new Scanner(System.in);
@@ -34,6 +36,7 @@ public class Diary{
         BufferedWriter bw = new BufferedWriter(diary);
     }
     
+    //asks user what they ate and how many grams they ate, adds it to the diary and to each foodgroup record
     public void setEntry() throws IOException{
         System.out.println("What food did you eat?");
         String food = user.nextLine();
@@ -55,6 +58,7 @@ public class Diary{
                 double grams = user.nextDouble();
                 String grams2 = Double.toString(grams);
                
+                //switch uses methods in each foodgroup class to set how many grams eaten
                 switch (foodGroup){
                     case 1:
                         fruit.setServEaten("Fruit", grams2);
@@ -79,6 +83,8 @@ public class Diary{
                         break;
                 }
                 while (true){
+                    
+                    //if the food fits another food group
                     try{
                         System.out.println("Does this food fit another food group?");
                         System.out.println("1. Yes");
@@ -94,6 +100,7 @@ public class Diary{
                         }
                         break;
                     
+                        //catches if wrong input
                     } catch (InputMismatchException e){
                         System.out.println("Incorrect input");
                         String notANumber = user.nextLine();
@@ -106,6 +113,7 @@ public class Diary{
             }
         }
         
+        //writes the food in the diary
         FileWriter diary = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(diary);
         bw.newLine();
@@ -113,6 +121,7 @@ public class Diary{
         bw.close();
     }
     
+    //prints out contents of diary and how many grams of each foodgroup eaten
     public String getEntry() throws IOException{
         List<String> lines = Files.readAllLines(Paths.get(fileName));
         String read = "";
@@ -136,6 +145,19 @@ public class Diary{
         read += fat.getCalcEaten() + "\n";
         read += sugar.getCalcEaten() + "\n";
         return read;
+    }
+    
+    //tell user how much of a food group left they should eat
+    public String dietRec() throws IOException{
+        String dietRec = "";
+        dietRec += "Fruit: " + fruit.amtRemain(fruit.getNeeded(), fruit.getEaten()) + "\n";
+        dietRec += "Meat and Nuts: " + meat.amtRemain(meat.getNeeded(), meat.getEaten()) + "\n";
+        dietRec += "Grain: " + grain.amtRemain(grain.getNeeded(), grain.getEaten()) + "\n";
+        dietRec += "Dairy: " + dairy.amtRemain(dairy.getNeeded(), dairy.getEaten()) + "\n";
+        dietRec += "Vegetables and Legumes: " + veggie.amtRemain(veggie.getNeeded(), veggie.getEaten()) + "\n";
+        dietRec += "Fat: " + fat.amtRemain(fat.getNeeded(), fat.getEaten()) + "\n";
+        dietRec += "Sugar: " + sugar.amtRemain(sugar.getNeeded(), sugar.getEaten()) + "\n";
+        return dietRec;
     }
     
     public void clearDiary() throws IOException{
