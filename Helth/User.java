@@ -1,5 +1,9 @@
 import java.io.*;
+import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 /**
  * 
  * @author LNM
@@ -19,6 +23,7 @@ public class User
     private int dSpec;
     private String sex;
     private int sexNum;
+    private Login login;
     
     Scanner user = new Scanner(System.in);
     //sets up scanner
@@ -45,9 +50,12 @@ public class User
     }
     
     //the next 8 or so methods are just getters for the particular variables
-    public int getAge()
+    public int getAge() throws IOException
     {
-        return this.age;
+        List<String> lines = Files.readAllLines(Paths.get("user.txt"));
+        String read = "";
+        read = lines.get(0);
+        return Integer.parseInt(read);
     }
           
     public int getWeight()
@@ -209,7 +217,7 @@ public class User
         }
         
        
-        while(dSpec < 1 || dSpec > 7 || dSpec != 7)
+        while(dSpec < 1 || dSpec > 7 || dSpec == 7)
         {
             try
             {
@@ -228,22 +236,22 @@ public class User
                 {
                     case 1:
                         dietSpec = "gluten Free";
-                        break;
+                        
                     case 2:
                         dietSpec = "lactose intolerant";
-                        break;
+                        
                     case 3:
                         dietSpec = "diabetic";
-                        break;
+                        
                     case 4:
                         dietSpec = "allergy: nut";
-                        break;
+                        
                    case 5:
                         dietSpec = "allergy: eggs";
-                        break;
+                       
                    case 6:
                         dietSpec = "allergy: fish";
-                        break;
+                        
                    case 7:
                         dietSpec = "No other diet specifications";
                         break;
@@ -311,9 +319,11 @@ public class User
         }
         catch(IOException ex) {
             System.out.println(
-                "Error writing to file '");
-            
+                "Error writing to file '" + user);     
         }
+        
+       
+        
     }
-}   
-
+}
+  
