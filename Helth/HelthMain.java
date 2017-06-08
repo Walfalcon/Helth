@@ -14,6 +14,7 @@ public class HelthMain
     private static User user = new User();
     private static Diary diary;
     private static RecipeGetter recipeGet = new RecipeGetter(user);
+    private static Login login = null;
     
     private enum Menu { //for use by the input method
         DIARY, GET_RECIPE, CALCULATOR, EXIT;
@@ -23,7 +24,25 @@ public class HelthMain
      * The hub of the program. All the other classes come off of here.
      */
     public static void main(String[] args) {
-        Login.signUp();
+        Scanner in = new Scanner(System.in);
+        while(login == null) {
+            System.out.println("1. Log in\n2. New User\n");
+            try{
+                switch(in.nextInt()) {
+                    case 1:
+                    login = new Login();
+                    break;
+                    case 2:
+                    login = new Login(login.signUp());
+                    break;
+                    default:
+                    System.out.println("type 1 or 2 ya big doofus");
+                }
+            } catch (Exception e) {
+                System.out.println("type 1 or 2 ya big doofus");
+            }
+        }
+        
         user.doWork();
         while(true){
             System.out.println("Do you want to:\n1. View Diary\n2. Get Recipes\n3. Calculate Nutrition\n4. Exit\n(Type a number)");

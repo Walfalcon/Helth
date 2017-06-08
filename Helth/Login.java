@@ -1,8 +1,51 @@
 import java.util.Scanner;
+import java.io.*;
+
 public class Login
 {
-    private static String username;
-    public static void signUp(){
+    private String username;
+    
+    /**
+     * the Login constructor is used when the user logs in.
+     */
+    public Login() {
+        Scanner in = new Scanner(System.in);
+        String password;
+        String realPass = "";
+        while(true) {
+            System.out.print("\nUsername: ");
+            username = in.nextLine();
+            BufferedReader user;
+            try {
+                user = new BufferedReader(new FileReader(username + ".txt"));
+                password = user.readLine();
+                user.close();
+                break;
+            } catch (FileNotFoundException whoops1) {
+                System.out.println("User not found.");
+            } catch (IOException whoops2) {
+                System.out.println("Something weird happened, try again.");
+            }
+        }
+        for(int i = 0; i < password.length(); i++) {
+            realPass += password.charAt(i) -1;
+        }
+        
+        while(true) {
+            System.out.println("\nPassword: ");
+            if(in.nextLine().equals(realPass)) {
+                break;
+            } else {
+                System.out.println("Incorrect password");
+            }
+        }
+    }
+    
+    public Login(String username) {
+        this.username = username;
+    }
+    
+    public static String signUp() throws IOException{
         //Prompt the user and pick String variables
         System.out.println("Please choose a username: ");
         Scanner in = new Scanner(System.in);
@@ -26,9 +69,25 @@ public class Login
                 System.out.println( "The password is valid");
                 break;
             }
-        }       
+        }
+        
+        BufferedWriter save = null;
+        try {
+            save = new BufferedWriter(new FileWriter(username + ".txt"));
+            for(int i = 0; i < password.length(); i++) {
+                save.write(password.charAt(i) +1);
+            }
+            save.flush();
+        } catch(IOException frogs) {
+            System.out.println("Somehow something went wrong somewhere.");
+        } finally {
+            save.close();
+        }
+        
+        return username;
     }
-    public static String getUsername() {
+    
+    public String getUsername() {
         return username;
     }
     
