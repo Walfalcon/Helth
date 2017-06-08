@@ -37,7 +37,7 @@ public class RecipeGetter
     public void reader() throws Exception
     {
         Scanner key = new Scanner(System.in);   //gets keyboard input
-        String dietPref = user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
+        String dietPref = user.getDietaryPref() + user.getDietSpec(); //gets the user's diet, set's it to it's own string for easy access
         ArrayList<String> keyword = new ArrayList<String>();  //Where we're going to put the keywords
         ArrayList<String> incl = new ArrayList<String>();  //Where we're going to put the ingredients to include
         ArrayList<String> excl = new ArrayList<String>();  //Where we're going to put the ingredients to exclude
@@ -67,6 +67,24 @@ public class RecipeGetter
         }
         if(dietPref.contains("vegetarian")) {
             keyword.add("vegetarian");
+        }
+        if(dietPref.contains("paleo")) {
+            keyword.add("paleo");
+        }
+        if(dietPref.contains("pescetarian")) {
+            excl.add("meat,ham,chicken,pork,beef,sausage,steak,turkey");
+        }
+        if(dietPref.contains("allergy: tree nut")) {
+            excl.add("walnuts,almonds,pecans,cashews,hazelnuts,nuts");
+        }
+        if(dietPref.contains("allergy: peanut")) {
+            excl.add("peanuts");
+        }
+        if(dietPref.contains("allergy: eggs")) {
+            excl.add("eggs");
+        }
+        if(dietPref.contains("allergy: fish")) {
+            excl.add("salmon,tuna,cod,tilapia,halibut,anchovy,snapper,mahi,fish");
         }
         
         //add the dietary preferences to the URL
