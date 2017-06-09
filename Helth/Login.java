@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Login
 {
-    private 
+    private static String username;
     public static void main(String[] args) {
      System.out.println("Please choose a username: ");
      Scanner in = new Scanner(System.in);
