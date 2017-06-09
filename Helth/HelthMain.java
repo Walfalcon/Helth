@@ -23,23 +23,26 @@ public class HelthMain
      * The hub of the program. All the other classes come off of here.
      */
     public static void main(String[] args) {
+        
         while(true){
             System.out.println("Do you want to:\n1. View Diary\n2. Get Recipes\n3. Calculate Nutrition\n4. Exit\n(Type a number)");
             
             switch(input()) {
                 case DIARY:
+                System.out.println("Checking priviledge");
                 case GET_RECIPE: 
-                    try{
-                        recipeGet.reader();
-                    } catch(Exception e) {
-                        System.out.println("RecipeGetter failed. It's probably your fault.");
-                    }
-                    break;
+                try{
+                    recipeGet.reader();
+                } catch(Exception e) {
+                    System.out.println("RecipeGetter failed. It's probably your fault.");
+                }
+                break;
                 case CALCULATOR:
-                    System.out.println("LOL joke's on you there is no calculator!");
-                    break;
+                System.out.println("LOL joke's on you there is no calculator!");
+                break;
                 case EXIT:
-                    return;
+                System.out.println("exiting...");
+                return;
             }
         }
     }
