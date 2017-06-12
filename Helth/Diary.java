@@ -18,12 +18,10 @@ public class Diary{
     private VegetablesAndLegumes veggie;
     private Fat fat;
     private Sugar sugar;
-    private Login login;
     
     //creates each foodgroup and creates a diary
     public Diary() throws IOException{
-        this.login = new Login();
-        this.fileName = "diary" + login.getUsername() + ".txt";
+        this.fileName = HelthMain.login.getUsername() + "Diary" + ".txt";
         this.user = new Scanner(System.in);
         this.diary = new FileWriter(fileName, true);
         this.fruit = new Fruit("Fruit");
@@ -40,20 +38,22 @@ public class Diary{
     public void setEntry() throws IOException{
         System.out.println("What food did you eat?");
         String food = user.nextLine();
+        food = user.nextLine();
         boolean check = true;
-        
         while (check == true){
             try{
-                System.out.println("Which food group is this from?");
-                System.out.println("1. Fruit");
-                System.out.println("2. Meats and Nuts (includes fish and egg)");
-                System.out.println("3. Grain");
-                System.out.println("4. Dairy");
-                System.out.println("5. Vegetables and Legumes");
-                System.out.println("6. Fat");
-                System.out.println("7. Sugar");
-                int foodGroup = user.nextInt();
-                
+                int foodGroup = 0;
+                while (foodGroup < 1 || foodGroup > 7){
+                    System.out.println("Which food group is this from?");
+                    System.out.println("1. Fruit");
+                    System.out.println("2. Meats and Nuts (includes fish and egg)");
+                    System.out.println("3. Grain");
+                    System.out.println("4. Dairy");
+                    System.out.println("5. Vegetables and Legumes");
+                    System.out.println("6. Fat");
+                    System.out.println("7. Sugar");
+                    foodGroup = user.nextInt();
+                }
                 System.out.println("How many grams did you have of this food?");
                 double grams = user.nextDouble();
                 String grams2 = Double.toString(grams);
@@ -82,30 +82,26 @@ public class Diary{
                         sugar.setServEaten("Sugar", grams2);
                         break;
                 }
-                while (true){
-                    
-                    //if the food fits another food group
-                    try{
-                        System.out.println("Does this food fit another food group?");
-                        System.out.println("1. Yes");
-                        System.out.println("2. No");
-                        int answer = user.nextInt();
-                        switch (answer){
-                            case 1:
-                                check = true;
-                                break;
-                            case 2:
-                                check = false;
-                                break;
-                        }
-                        break;
-                    
-                        //catches if wrong input
-                    } catch (InputMismatchException e){
-                        System.out.println("Incorrect input");
-                        String notANumber = user.nextLine();
+                //if the food fits another food group
+                try{
+                    System.out.println("Does this food fit another food group?");
+                    System.out.println("1. Yes");
+                    System.out.println("2. No");
+                    int answer = user.nextInt();
+                    switch (answer){
+                        case 1:
+                            check = true;
+                            break;
+                        case 2:
+                            check = false;
+                            break;
                     }
+                    //catches if wrong input
+                    } catch (InputMismatchException e){
+                    System.out.println("Incorrect input");
+                    String notANumber = user.nextLine();
                 }
+            
                 
             } catch (InputMismatchException e){
                 System.out.println("Incorrect input");
@@ -124,19 +120,12 @@ public class Diary{
     //prints out contents of diary and how many grams of each foodgroup eaten
     public String getEntry() throws IOException{
         List<String> lines = Files.readAllLines(Paths.get(fileName));
-        String read = "";
+        String read = "Food Eaten:";
         for (int i = 0; i < lines.size(); i++) {
             read += lines.get(i) + "\n";
         }
         
-        fruit.calcEaten();
-        meat.calcEaten();
-        grain.calcEaten();
-        dairy.calcEaten();
-        veggie.calcEaten();
-        fat.calcEaten();
-        sugar.calcEaten();
-        System.out.println("Grams Eaten:\n");
+        read += "Grams Eaten:\n";
         read += fruit.getCalcEaten() + "\n";
         read += meat.getCalcEaten() + "\n";
         read += grain.getCalcEaten() + "\n";
@@ -149,6 +138,13 @@ public class Diary{
     
     //tell user how much of a food group left they should eat
     public String dietRec() throws IOException{
+        fruit.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        meat.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        grain.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        dairy.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        veggie.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        fat.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        sugar.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
         String dietRec = "";
         dietRec += "Fruit: " + fruit.amtRemain(fruit.getNeeded(), fruit.getEaten()) + "\n";
         dietRec += "Meat and Nuts: " + meat.amtRemain(meat.getNeeded(), meat.getEaten()) + "\n";
@@ -161,13 +157,36 @@ public class Diary{
     }
     
     public void clearDiary() throws IOException{
-        diary = new FileWriter(fileName);
-        fruit.clearFoodGroup("Fruit");
-        meat.clearFoodGroup("MeatsAndNuts");
-        grain.clearFoodGroup("Grain");
-        dairy.clearFoodGroup("Dairy");
-        veggie.clearFoodGroup("VeggiesAndLegumes");
-        fat.clearFoodGroup("Fat");
-        sugar.clearFoodGroup("Sugar");
+        boolean check = false;
+        try{
+            System.out.println("Would you like to clear your diary?");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            int answer = user.nextInt();
+            switch (answer){
+                case 1:
+                    check = true;
+                    break;
+                case 2:
+                    check = false;
+                    break;
+            }       
+            //catches if wrong input
+        } catch (InputMismatchException e){
+                System.out.println("Incorrect input");
+                String notANumber = user.nextLine();
+        }
+        
+        if (check == true){
+            diary = new FileWriter(fileName);
+            fruit.clearFoodGroup("Fruit");
+            meat.clearFoodGroup("MeatsAndNuts");
+            grain.clearFoodGroup("Grain");
+            dairy.clearFoodGroup("Dairy");
+            veggie.clearFoodGroup("VeggiesAndLegumes");
+            fat.clearFoodGroup("Fat");
+            sugar.clearFoodGroup("Sugar");
+        
+        }
     }
 }

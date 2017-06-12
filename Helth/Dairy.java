@@ -109,8 +109,8 @@ public class Dairy extends FoodGroup{
         return super.amtRemain(amtNeeded, calcEaten);
     }
     
-    public void calcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get("Dairy.txt"));
+    public String getCalcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "Dairy.txt"));
         String read = "";
         calcEaten = 0;
         double grams;
@@ -123,11 +123,12 @@ public class Dairy extends FoodGroup{
             }
             calcEaten += grams;
         }
-    }
-    
-    public String getCalcEaten() throws IOException{
         return "Dairy: " + calcEaten + " grams";
     }
+    
+    /*public String getCalcEaten() throws IOException{
+        return "Dairy: " + calcEaten + " grams";
+    }*/
     
     public double getEaten() throws IOException{
         return calcEaten;

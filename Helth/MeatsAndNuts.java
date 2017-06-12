@@ -109,8 +109,8 @@ public class MeatsAndNuts extends FoodGroup{
         return amtNeeded;
     }
     
-    public void calcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get("MeatsAndNuts.txt"));
+    public String getCalcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "MeatsAndNuts.txt"));
         String read = "";
         calcEaten = 0;
         double grams;
@@ -123,11 +123,12 @@ public class MeatsAndNuts extends FoodGroup{
             }
             calcEaten += grams;
         }
-    }
-    
-    public String getCalcEaten() throws IOException{
         return "Meats and Nuts: " + calcEaten + " grams";
     }
+    
+    /*public String getCalcEaten() throws IOException{
+        return "Meats and Nuts: " + calcEaten + " grams";
+    }*/
     
     public double getEaten() throws IOException{
         return calcEaten;
