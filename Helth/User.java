@@ -51,7 +51,7 @@ public class User
     }
     
     //the next 8 or so methods are just getters for the particular variables
-    public static int getAge() throws IOException
+    public int getAge() throws IOException
     {
         List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
@@ -59,7 +59,7 @@ public class User
         return Integer.parseInt(read);
     }
           
-    public static int getWeight()throws IOException
+    public int getWeight()throws IOException
     {
         List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
@@ -67,7 +67,7 @@ public class User
         return Integer.parseInt(read);
     }
 
-    public static int getHeight()throws IOException
+    public int getHeight()throws IOException
     {
         List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
@@ -75,7 +75,7 @@ public class User
         return Integer.parseInt(read);
     }
        
-    public static String getDietaryPref()throws IOException
+    public String getDietaryPref()throws IOException
     {
        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
        String read = "";
@@ -83,7 +83,7 @@ public class User
        return read;
     }
     
-    public static String getActivity() throws IOException
+    public String getActivity()throws IOException
     {
         List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
@@ -96,7 +96,7 @@ public class User
         return this.activeNum;
     }
     
-    public static String getSex() throws IOException
+    public String getSex()throws IOException
     {
        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
        String read = "";
@@ -233,7 +233,6 @@ public class User
                 break;
         }
         
-       
         while(dSpec != 8)
         {
             try
@@ -275,10 +274,6 @@ public class User
                     case 8:
                         break;
                 } 
-                ArrayList deitSpec = new ArrayList();
-                System.out.println(deitSpec.size() );
-                
-                deitSpec.add(dietSpec);
             }catch (InputMismatchException e){
                  System.out.println("Pls...we're trying to help ur helth...let us");
                  String notDSpec = user.nextLine();                
@@ -300,7 +295,7 @@ public class User
              }
         }while(sexNum < 1 || sexNum > 2);
         
-        switch ( activeNum)
+        switch ( sexNum)
         {
             case 1:
                 sex = "male";
@@ -334,7 +329,9 @@ public class User
             bufferedWriter.newLine();
             bufferedWriter.write(sex);
             bufferedWriter.newLine();
-            //bufferedWriter.write(deitSpec);
+            for(String dietSpec: deitSpec){
+                bufferedWriter.write(dietSpec + "    ");
+            }
             bufferedWriter.newLine();
             bufferedWriter.write(dietaryPref);
             // closed files
