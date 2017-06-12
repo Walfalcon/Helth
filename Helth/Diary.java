@@ -42,16 +42,18 @@ public class Diary{
         boolean check = true;
         while (check == true){
             try{
-                System.out.println("Which food group is this from?");
-                System.out.println("1. Fruit");
-                System.out.println("2. Meats and Nuts (includes fish and egg)");
-                System.out.println("3. Grain");
-                System.out.println("4. Dairy");
-                System.out.println("5. Vegetables and Legumes");
-                System.out.println("6. Fat");
-                System.out.println("7. Sugar");
-                int foodGroup = user.nextInt();
-                
+                int foodGroup = 0;
+                while (foodGroup < 1 || foodGroup > 7){
+                    System.out.println("Which food group is this from?");
+                    System.out.println("1. Fruit");
+                    System.out.println("2. Meats and Nuts (includes fish and egg)");
+                    System.out.println("3. Grain");
+                    System.out.println("4. Dairy");
+                    System.out.println("5. Vegetables and Legumes");
+                    System.out.println("6. Fat");
+                    System.out.println("7. Sugar");
+                    foodGroup = user.nextInt();
+                }
                 System.out.println("How many grams did you have of this food?");
                 double grams = user.nextDouble();
                 String grams2 = Double.toString(grams);
@@ -136,6 +138,13 @@ public class Diary{
     
     //tell user how much of a food group left they should eat
     public String dietRec() throws IOException{
+        fruit.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        meat.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        grain.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        dairy.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        veggie.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        fat.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        sugar.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
         String dietRec = "";
         dietRec += "Fruit: " + fruit.amtRemain(fruit.getNeeded(), fruit.getEaten()) + "\n";
         dietRec += "Meat and Nuts: " + meat.amtRemain(meat.getNeeded(), meat.getEaten()) + "\n";

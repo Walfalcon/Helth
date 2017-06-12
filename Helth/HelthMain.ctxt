@@ -1,10 +1,8 @@
 #BlueJ class context
-comment0.target=HelthMain
-comment0.text=\r\n\ The\ main\ class\r\n\ All\ other\ classes\ will\ be\ called\ from\ here\r\n\ \r\n\ It\ should\ only\ contain\ one\ method,\ main,\ and\ shouldn't\ have\ any\ of\ the\ code\r\n\ to\ actually\ do\ anything\ in\ it.\ Just\ have\ other\ classes\ do\ all\ the\ work.\ This\r\n\ is\ the\ organizer.\r\n\ \r\n\ This\ will\ be\ the\ only\ class\ that\ everyone\ works\ on,\ so\ don't\ mess\ it\ up\ too\ much.\r\n
-comment1.params=args
-comment1.target=void\ main(java.lang.String[])
-comment1.text=\r\n\ The\ hub\ of\ the\ program.\ All\ the\ other\ classes\ come\ off\ of\ here.\r\n
-comment2.params=
-comment2.target=HelthMain.Menu\ input()
-comment2.text=\r\n\ A\ simple\ input\ method.\ Gets\ which\ function\ of\ the\ program\ the\ user\ wants\ next\ and\ returns\ it.\r\n
-numComments=3
+comment0.params=args
+comment0.target=void\ main(java.lang.String[])
+comment0.text=\r\n\ The\ hub\ of\ the\ program.\ All\ the\ other\ classes\ come\ off\ of\ here.\r\n
+comment1.params=
+comment1.target=HelthMain.Menu\ input()
+comment1.text=\r\n\ A\ simple\ input\ method.\ Gets\ which\ function\ of\ the\ program\ the\ user\ wants\ next\ and\ returns\ it.\r\n
+numComments=2
