@@ -170,7 +170,7 @@ public class RecipeGetter
             //Now get the description
             while(currentLine.indexOf("alt=") == -1) currentLine = input.readLine();
             System.out.println(currentLine.substring(currentLine.indexOf("alt=") + 5, currentLine.indexOf("\" title=")));
-            System.out.println("Do you want to view this recipe?(VIEW, NEXT, or EXIT)");
+            System.out.println("Do you want to view this recipe?(VIEW to view the recipe, NEXT to go to the next recipe, or EXIT to exit)");
             
             //Switch, so the user can choose to view the recipe, or just move on to the next one.
             switch(input("VIEW", "NEXT", "EXIT")) {
@@ -245,7 +245,7 @@ public class RecipeGetter
                 System.out.println(recipe); //This is where we actually print out the recipe to the console
                 
                 //Now we save it.
-                System.out.println("Do you want to save this recipe, or do you want to see another?(SAVE, NEXT, or EXIT)");
+                System.out.println("Do you want to save this recipe, or do you want to see another?(SAVE to save the recipe, NEXT to go to the next recipe, or EXIT to exit)");
                 switch(input("SAVE", "NEXT", "EXIT")) {
                     case NO:
                     System.out.println("\n\n\n\n\n\n");
