@@ -1,35 +1,37 @@
-import java.util.ArrayList;
+import java.io.*;
 
 public abstract class FoodGroup {
-    
-    private ArrayList<String> grouping;
-    private double servNeeded;
-    private double additServe;
-    private ArrayList<Double> grams;
     private double servEaten;
-
-    public FoodGroup(){
-        grouping = new ArrayList<String>();
+    private FileWriter groupings;
+    public FoodGroup(String group) throws IOException{
+        this.groupings = new FileWriter(HelthMain.login.getUsername() + group + ".txt", true);
     }
     
-    public void setGrouping(String food){
-        grouping.add(food);
+    public abstract void setAmtNeeded(int age, String sex, String activity);
+    
+    public String getAmtNeeded(double amtNeeded){
+        return "Approximately " + amtNeeded + " servings ";
     }
     
-    public abstract void setAmtNeeded(int age, String sex);
-    
-    public String getAmtNeeded(){
-        return servNeeded + " to " + (servNeeded+additServe) + " servings.";
+    public String amtRemain(double amtNeeded, double calcEaten){
+        if(amtNeeded - (calcEaten/8.5) > 0){
+            return "You have to eat " + (amtNeeded - (calcEaten/8.5)) + " servings left of";
+        } else {
+            return "No more servings needed.";
+        }
     }
     
-    public String amtRemain(double totalServe, double servEaten){
-        totalServe = servNeeded + additServe;
-        return (totalServe - servEaten) + " servings left.";
+    public abstract String getCalcEaten() throws IOException;
+    
+    public void setServEaten (String group, String grams2) throws IOException{
+        FileWriter groupings = new FileWriter(HelthMain.login.getUsername() + group + ".txt", true);
+        BufferedWriter bw = new BufferedWriter(groupings);
+        bw.newLine();
+        bw.write(grams2);
+        bw.close();
     }
     
-    public abstract double calcEaten(ArrayList<Double> grams);
-    
-    public void setServEaten (double servEaten){
-        this.servEaten = servEaten;
+    public void clearFoodGroup(String group) throws IOException{
+        groupings = new FileWriter(group + ".txt");
     }
 }

@@ -14,6 +14,7 @@ public class HelthMain
     private static User user = new User();
     private static Diary diary;
     private static RecipeGetter recipeGet = new RecipeGetter(user);
+    public static Login login = null;
     
     private enum Menu { //for use by the input method
         DIARY, GET_RECIPE, CALCULATOR, EXIT;
@@ -23,13 +24,36 @@ public class HelthMain
      * The hub of the program. All the other classes come off of here.
      */
     public static void main(String[] args) {
-        
+        Scanner in = new Scanner(System.in);
+        while(login == null) {
+            System.out.println("1. Log in\n2. New User\n");
+            try{
+                switch(in.nextInt()) {
+                    case 1:
+                    login = new Login();
+                    break;
+                    case 2:
+                    login = new Login(login.signUp());
+                    user.doWork();
+                    break;
+                    default:
+                    System.out.println("type 1 or 2 ya big doofus");
+                }
+            } catch (Exception e) {
+                System.out.println("type 1 or 2 ya big doofus");
+            }
+        }
         while(true){
             System.out.println("Do you want to:\n1. View Diary\n2. Get Recipes\n3. Calculate Nutrition\n4. Exit\n(Type a number)");
             
             switch(input()) {
                 case DIARY:
-                System.out.println("Checking priviledge");
+                try{
+                    DiaryDriver.main();
+                } catch(Exception e) {
+                    System.out.println("Diary broke");
+                }
+                break;
                 case GET_RECIPE: 
                 try{
                     recipeGet.reader();
@@ -71,12 +95,13 @@ public class HelthMain
                 case 4: return Menu.EXIT;
                 default:
                     if(input > 9000){
-                        for(int i = 0; i <= 9000; i+= 1)
+                        for(int i = 0; i <= 9000; i+= 1){
                         System.out.println("....Please wait, executing stalememes.txt....");
-                        
+                    }
                         System.out.println("done");
-                    } else
+                    } else{
                     System.out.println("That's not an option type one of the actual things.");
+                }
             }
         }
     }

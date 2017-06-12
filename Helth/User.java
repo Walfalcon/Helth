@@ -53,7 +53,7 @@ public class User
     //the next 8 or so methods are just getters for the particular variables
     public int getAge() throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername()+ "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
         read = lines.get(0);
         return Integer.parseInt(read);
@@ -61,7 +61,7 @@ public class User
           
     public int getWeight()throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername()+ "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
         read = lines.get(1);
         return Integer.parseInt(read);
@@ -77,7 +77,7 @@ public class User
        
     public String getDietaryPref()throws IOException
     {
-       List<String> lines = Files.readAllLines(Paths.get(Login.getUsername()+ "User.txt"));
+       List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
        String read = "";
        read = lines.get(2);
        return read;
@@ -85,7 +85,7 @@ public class User
     
     public String getActivity()throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername()+ "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
         String read = "";
         read = lines.get(3);
         return read;
@@ -98,7 +98,7 @@ public class User
     
     public String getSex()throws IOException
     {
-       List<String> lines = Files.readAllLines(Paths.get(Login.getUsername()+ "User.txt"));
+       List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
        String read = "";
        read = lines.get(4);
        return read;
@@ -233,8 +233,7 @@ public class User
                 break;
         }
         
-        ArrayList <String> deitSpec = new ArrayList<String>();
-        while(dSpec < 1 || dSpec > 7 || dSpec != 7)
+        while(dSpec != 8)
         {
             try
             {
@@ -242,39 +241,39 @@ public class User
                 System.out.println("Enter 1: gluten free");
                 System.out.println("Enter 2: lactose intolerant");
                 System.out.println("Enter 3: diabetic");
-                System.out.println("Enter 4: allergy: nut");
-                System.out.println("Enter 5: allergy: eggs");
-                System.out.println("Enter 6: allergy: fish");                
-                System.out.println("Enter 7: No other diet specifications");
+                System.out.println("Enter 4: allergy: tree nut");
+                System.out.println("Enter 5: allergy: peanut");
+                System.out.println("Enter 6: allergy: eggs");
+                System.out.println("Enter 7: allergy: fish");                
+                System.out.println("Enter 8: No other diet specifications");
                 
                 dSpec = user.nextInt();
                     switch( dSpec)
                 {
                     case 1:
-                        dietSpec = "gluten Free";
+                        dietSpec += "gluten Free";
                         break;
                     case 2:
-                        dietSpec = "lactose intolerant";
+                        dietSpec += "lactose intolerant";
                         break;
                     case 3:
-                        dietSpec = "diabetic";
+                        dietSpec += "diabetic";
                         break;
                     case 4:
-                        dietSpec = "allergy: nut";
+                        dietSpec += "allergy: tree nut";
                         break;
-                   case 5:
-                        dietSpec = "allergy: eggs";
+                    case 5:
+                        dietSpec += "allergy: peanut";
                         break;
-                   case 6:
-                        dietSpec = "allergy: fish";
+                    case 6:
+                        dietSpec += "allergy: eggs";
                         break;
-                   case 7:
+                    case 7:
+                        dietSpec += "allergy: fish";
+                        break;
+                    case 8:
                         break;
                 } 
-                
-                
-                deitSpec.add(dietSpec);
-                
             }catch (InputMismatchException e){
                  System.out.println("Pls...we're trying to help ur helth...let us");
                  String notDSpec = user.nextLine();                
@@ -307,7 +306,7 @@ public class User
             
         }
             
-        String fileName = Login.getUsername()+ "User.txt";
+        String fileName = Login.getUsername() + "User.txt";
         
         try {
             // 

@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.*;
 
 public class VegetablesAndLegumes extends FoodGroup{
     
@@ -6,16 +10,14 @@ public class VegetablesAndLegumes extends FoodGroup{
     private double additServe;
     private double servEaten;
     private double totalServe;
+    private double calcEaten;
+    private double amtNeeded;
     
-    public VegetablesAndLegumes(){
-        super();
+    public VegetablesAndLegumes(String group) throws IOException{
+        super(group);
     }
     
-    public void setGrouping(String food){
-        super.setGrouping(food);
-    }
-    
-    public void setAmtNeeded(int age, String sex){
+    public void setAmtNeeded(int age, String sex, String activity){
         if (age < 2){
             servNeeded = 2;
             additServe = 1;
@@ -78,25 +80,64 @@ public class VegetablesAndLegumes extends FoodGroup{
             }
         }
         
-    }
-    
-    public String getAmtNeeded(double servNeeded, double additServe){
-        return super.getAmtNeeded();
-    }
-    
-    public String amtRemain(double totalServe, double servEaten){
-        return super.amtRemain(totalServe, servEaten);
-    }
-    
-    public double calcEaten(ArrayList<Double> grams){
-        for (int i = 0; i < grams.size(); i++){
-            servEaten += grams.get(i);
+        switch (activity){
+            case "sedentary":
+                amtNeeded = servNeeded;
+                break;
+            case "lightly active":
+                amtNeeded = servNeeded + (additServe / 3);
+                break;
+            case "active":
+                amtNeeded = servNeeded + (2 * additServe / 3);
+                break;
+            case "very active":
+                amtNeeded = servNeeded + additServe;
+                break;
         }
-        return servEaten;
     }
     
-    public void setServEaten (double servEaten){
-        super.setServEaten(servEaten);
+    public String getAmtNeeded(double amtNeeded){
+        return super.getAmtNeeded(amtNeeded) + "of vegetables and legumes.";
     }
     
+    public double getNeeded(){
+        return amtNeeded;
+    }
+    
+    public String amtRemain(double amtNeeded, double calcEaten){
+        return super.amtRemain(amtNeeded, calcEaten);
+    }
+    
+    public String getCalcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "VeggiesAndLegumes.txt"));
+        String read = "";
+        calcEaten = 0;
+        double grams;
+        for (int i = 0; i < lines.size(); i++){
+            read = lines.get(i);
+            try{
+                grams = Double.parseDouble(read);
+            } catch (NumberFormatException e){
+                grams = 0;
+            }
+            calcEaten += grams;
+        }
+        return "Vegetables and Legumes: " + calcEaten + " grams";
+    }
+    
+    /*public String getCalcEaten() throws IOException{
+        return "Vegetables and Legumes: " + calcEaten + " grams";
+    }*/
+    
+    public double getEaten() throws IOException{
+        return calcEaten;
+    }
+    
+    public void setServEaten (String group, String grams2) throws IOException{
+        super.setServEaten(group, grams2);
+    }
+    
+    public void clearFoodGroup(String group) throws IOException{
+        super.clearFoodGroup(group);
+    }
 }

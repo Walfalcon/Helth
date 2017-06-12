@@ -37,11 +37,10 @@ public class RecipeGetter
     public void reader() throws Exception
     {
         Scanner key = new Scanner(System.in);   //gets keyboard input
-        String dietPref = user.getDietaryPref(); //gets the user's diet, set's it to it's own string for easy access
+        String dietPref = user.getDietaryPref() + user.getDietSpec(); //gets the user's diet, set's it to it's own string for easy access
         ArrayList<String> keyword = new ArrayList<String>();  //Where we're going to put the keywords
         ArrayList<String> incl = new ArrayList<String>();  //Where we're going to put the ingredients to include
         ArrayList<String> excl = new ArrayList<String>();  //Where we're going to put the ingredients to exclude
-        BufferedWriter save = null;
         
         //get all the ingredients the user wants to cook with
         System.out.println("Are there any ingredients you want to add? (Type \"done\" when you're done adding ingredients)");
@@ -68,6 +67,24 @@ public class RecipeGetter
         }
         if(dietPref.contains("vegetarian")) {
             keyword.add("vegetarian");
+        }
+        if(dietPref.contains("paleo")) {
+            keyword.add("paleo");
+        }
+        if(dietPref.contains("pescetarian")) {
+            excl.add("meat,ham,chicken,pork,beef,sausage,steak,turkey");
+        }
+        if(dietPref.contains("allergy: tree nut")) {
+            excl.add("walnuts,almonds,pecans,cashews,hazelnuts,nuts");
+        }
+        if(dietPref.contains("allergy: peanut")) {
+            excl.add("peanuts");
+        }
+        if(dietPref.contains("allergy: eggs")) {
+            excl.add("eggs");
+        }
+        if(dietPref.contains("allergy: fish")) {
+            excl.add("salmon,tuna,cod,tilapia,halibut,anchovy,snapper,mahi,fish");
         }
         
         //add the dietary preferences to the URL
@@ -120,143 +137,146 @@ public class RecipeGetter
         /*
          * Now actually reading from the website
          */
+        boolean done = false;
+        while(!done) {
+            done = recipe(search);
+        }
+    }
+    
+    private boolean recipe(URL search) throws Exception{
         BufferedReader input = new BufferedReader(new InputStreamReader(search.openStream())); //create a BufferedReader to be more efficient
-        
+        BufferedWriter save = null;
+                
         String currentLine = input.readLine();
         URL recipePage;
         BufferedReader recipeIn;
         String recipeName;
         String recipe = "";
         //each loop is one recipe
-        while(currentLine != null) {
-            System.out.println(currentLine);
+        while(true) {
             while(currentLine != null && currentLine.indexOf("/recipe/") == -1) {
                 currentLine = input.readLine();
             }
             
             if(currentLine == null) {
-            System.out.println(currentLine);
-                    System.out.println("That's the last recipe. Returning to main menu.");
-                    break;
+                System.out.println("boop");
+                input.close();
+                return false;
             }
-            
+           
             //Get the page of the recipe
             recipePage = new URL(recipeSite, currentLine.substring(currentLine.indexOf("/recipe/"), currentLine.indexOf("/\"") +1));
-
+            
             //Now get the description
             while(currentLine.indexOf("alt=") == -1) currentLine = input.readLine();
             System.out.println(currentLine.substring(currentLine.indexOf("alt=") + 5, currentLine.indexOf("\" title=")));
-            System.out.println("Do you want to view this recipe?(VIEW, NEXT, or EXIT)");
+            System.out.println("Do you want to view this recipe?(VIEW to view the recipe, NEXT to go to the next recipe, or EXIT to exit)");
             
             //Switch, so the user can choose to view the recipe, or just move on to the next one.
             switch(input("VIEW", "NEXT", "EXIT")) {
                 case EXIT:
-                    System.out.println("Exiting...");
-                    input.close();
-                    return;
+                System.out.println("Exiting...");
+                input.close();
+                return true;
                 case NO:
-                    while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
-                    currentLine = input.readLine();
-                    break;
+                while(currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
+                currentLine = input.readLine();
+                break;
                 case YES:
-                    System.out.print("[");
-                    recipeIn = new BufferedReader(new InputStreamReader(recipePage.openStream()));
-                    String recipeLine = recipeIn.readLine();
+                System.out.print("[");
+                recipeIn = new BufferedReader(new InputStreamReader(recipePage.openStream()));
+                String recipeLine = recipeIn.readLine();
+                
+                System.out.print("#");
+                while(recipeLine.indexOf("title") == -1) recipeLine = recipeIn.readLine();
+                recipeName = recipeLine.substring(recipeLine.indexOf(">") +1, recipeLine.indexOf(" -"));
+               
+                System.out.print("#");
+                while((recipeLine = recipeIn.readLine()).indexOf("itemprop=\"name\">") == -1);
+               
+                System.out.print("#");
+                recipe = recipeLine.substring(recipeLine.indexOf("name\">") + 6, recipeLine.indexOf("</h1>")) + "\n\n";
+                
+                //Get the number of servings
+                System.out.print("#");
+                while(recipeLine.indexOf("Original recipe yields") == -1)recipeLine = recipeIn.readLine();
+                recipe += "\nServings: " + recipeLine.substring(recipeLine.indexOf("ds") + 3, recipeLine.indexOf(" s"));
                     
-                    System.out.print("#");
-                    while(recipeLine.indexOf("title") == -1) recipeLine = recipeIn.readLine();
-                    recipeName = recipeLine.substring(recipeLine.indexOf(">") +1, recipeLine.indexOf(" -"));
-                    
-                    System.out.print("#");
-                    while((recipeLine = recipeIn.readLine()).indexOf("itemprop=\"name\">") == -1);
-                    
-                    System.out.print("#");
-                    recipe = recipeLine.substring(recipeLine.indexOf("name\">") + 6, recipeLine.indexOf("</h1>")) + "\n\n";
-                    
-                    //Get the number of servings
-                    System.out.print("#");
-                    while(recipeLine.indexOf("Original recipe yields") == -1)recipeLine = recipeIn.readLine();
-                    recipe += "\nServings: " + recipeLine.substring(recipeLine.indexOf("ds") + 3, recipeLine.indexOf(" s"));
-                    
-                    //Get the nutrition. I could use a loop, but I won't.
-                    System.out.print("#");
-                    recipe += "\n\nNutrition:\nCalories: ";
-                    while(recipeLine.indexOf("\"calories\"") == -1)recipeLine = recipeIn.readLine();
-                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " kcal\nFat: ";
-                    while(recipeLine.indexOf("\"fatContent\"") == -1)recipeLine = recipeIn.readLine();
-                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nCarbs: ";
-                    while(recipeLine.indexOf("hydrateContent\"") == -1)recipeLine = recipeIn.readLine();
-                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nProtein: ";
-                    while(recipeLine.indexOf("roteinContent\"") == -1)recipeLine = recipeIn.readLine();
-                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nCholesterol: ";
-                    while(recipeLine.indexOf("rolContent\"") == -1)recipeLine = recipeIn.readLine();
-                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " mg\nSodium: ";
-                    while(recipeLine.indexOf("umContent\"") == -1)recipeLine = recipeIn.readLine();
-                    recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " mg\n";
-                                        
-                    //Add the ingredients
-                    System.out.print("#");
-                    recipe += "\nIngredients-\n";
-                    while(recipeLine.indexOf("Add all ingredients to list") == -1) {
-                        while(recipeLine.indexOf("\"ingredients\"") == -1 && recipeLine.indexOf("Add all ingredients to list") == -1) recipeLine = recipeIn.readLine();
-                        if(recipeLine.indexOf("Add all ingredients to list") == -1) {
-                            recipe += recipeLine.substring(recipeLine.indexOf(">") + 1, recipeLine.indexOf("</")) + "\n";
-                            recipeLine = recipeIn.readLine();
-                        }
-                    }
-                    
-                    //Get the instructions!
-                    System.out.print("#");
-                    recipe += "\n\nDirections\n";
-                    while(recipeLine.indexOf("stepIsActive") == -1)recipeLine = recipeIn.readLine();
-                    while(recipeLine.indexOf("</ol>") == -1) {
-                        recipe += "\n" + recipeLine.substring(recipeLine.indexOf("m\">") + 3, recipeLine.indexOf("</span>")) + "\n";
+                //Get the nutrition. I could use a loop, but I won't.
+                System.out.print("#");
+                recipe += "\n\nNutrition:\nCalories: ";
+                while(recipeLine.indexOf("\"calories\"") == -1)recipeLine = recipeIn.readLine();
+                recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " kcal\nFat: ";
+                while(recipeLine.indexOf("\"fatContent\"") == -1)recipeLine = recipeIn.readLine();
+                recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nCarbs: ";
+                while(recipeLine.indexOf("hydrateContent\"") == -1)recipeLine = recipeIn.readLine();
+                recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nProtein: ";
+                while(recipeLine.indexOf("roteinContent\"") == -1)recipeLine = recipeIn.readLine();
+                recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " g\nCholesterol: ";
+                while(recipeLine.indexOf("rolContent\"") == -1)recipeLine = recipeIn.readLine();
+                recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " mg\nSodium: ";
+                while(recipeLine.indexOf("umContent\"") == -1)recipeLine = recipeIn.readLine();
+                recipe += recipeLine.substring(recipeLine.indexOf("n>") +2, recipeLine.indexOf("</s")).replace("&lt; ", "<") + " mg\n";
+                                   
+                //Add the ingredients
+                System.out.print("#");
+                recipe += "\nIngredients-\n";
+                while(recipeLine.indexOf("Add all ingredients to list") == -1) {
+                    while(recipeLine.indexOf("\"ingredients\"") == -1 && recipeLine.indexOf("Add all ingredients to list") == -1) recipeLine = recipeIn.readLine();
+                    if(recipeLine.indexOf("Add all ingredients to list") == -1) {
+                        recipe += recipeLine.substring(recipeLine.indexOf(">") + 1, recipeLine.indexOf("</")) + "\n";
                         recipeLine = recipeIn.readLine();
                     }
-                    
-                    recipe = recipe.replace("&#39;", "'");
-                    recipe = recipe.replace("&amp;", "&");
-                    
-                    System.out.println("]");
-                    System.out.println(recipe); //This is where we actually print out the recipe to the console
-                    
-                    //Now we save it.
-                    System.out.println("Do you want to save this recipe, or do you want to see another?(SAVE, NEXT, or EXIT)");
-                    switch(input("SAVE", "NEXT", "EXIT")) {
-                        case NO:
-                            System.out.println("\n\n\n\n\n\n");
-                            break;
-                        case EXIT:
-                            System.out.println("Exiting...");
-                            input.close();
-                            recipeIn.close();
-                            return;
-                        case YES:
-                            try {
-                                save = new BufferedWriter(new FileWriter("recipes\\" + recipeName.replace(" ", "space") + ".txt")); //saves to a .txt file in the recipes folder
-                                for(int c = 0; c < recipe.length(); c++/*lol*/) {
-                                    if(recipe.charAt(c) == '\n') save.newLine();
-                                    else save.write(recipe.charAt(c));
-                                }
-                                save.flush();
-                                System.out.println("Saved to recipes\\" + recipeName.replace(" ", "space") + ".txt");
-                            } catch(IOException dagnabbit) {
-                                System.out.println("Saving the recipe failed, for some reason. Sorry.");
-                            }finally {
-                                save.close();
-                            }
-                    }
-                    
+                }
+                
+                //Get the instructions!
+                System.out.print("#");
+                recipe += "\n\nDirections\n";
+                while(recipeLine.indexOf("stepIsActive") == -1)recipeLine = recipeIn.readLine();
+                while(recipeLine.indexOf("</ol>") == -1) {
+                    recipe += "\n" + recipeLine.substring(recipeLine.indexOf("m\">") + 3, recipeLine.indexOf("</span>")) + "\n";
+                    recipeLine = recipeIn.readLine();
+                }
+               
+                recipe = recipe.replace("&#39;", "'");
+                recipe = recipe.replace("&amp;", "&");
+                 
+                System.out.println("]");
+                System.out.println(recipe); //This is where we actually print out the recipe to the console
+                
+                //Now we save it.
+                System.out.println("Do you want to save this recipe, or do you want to see another?(SAVE to save the recipe, NEXT to go to the next recipe, or EXIT to exit)");
+                switch(input("SAVE", "NEXT", "EXIT")) {
+                    case NO:
+                    System.out.println("\n\n\n\n\n\n");
+                    break;
+                    case EXIT:
+                    System.out.println("Exiting...");
+                    input.close();
                     recipeIn.close();
-                    while(currentLine != null && currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
-
-                    currentLine = (currentLine == null) ? null : input.readLine();
+                    return true;
+                    case YES:
+                    try {
+                        save = new BufferedWriter(new FileWriter("recipes\\" + recipeName.replace(" ", "space") + ".txt")); //saves to a .txt file in the recipes folder
+                        for(int c = 0; c < recipe.length(); c++/*lol*/) {
+                            if(recipe.charAt(c) == '\n') save.newLine();
+                            else save.write(recipe.charAt(c));
+                        }
+                        save.flush();
+                        System.out.println("Saved to recipes\\" + recipeName.replace(" ", "space") + ".txt");
+                    } catch(IOException dagnabbit) {
+                        System.out.println("Saving the recipe failed, for some reason. Sorry.");
+                    }finally {
+                        save.close();
+                    }
+                }
+                
+                recipeIn.close();
+                while(currentLine != null && currentLine.indexOf("/recipe/") == -1) currentLine = input.readLine();
+                currentLine = (currentLine == null) ? null : input.readLine();
             }
         }
-        
-        input.close(); //finito!
     }
-    
     /**
      * Just a simple input method. Gets one of three responses and returns it.
      */

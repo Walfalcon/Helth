@@ -1,25 +1,25 @@
 import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.io.*;
 
-public class Fruit extends FoodGroup{
+public class MeatsAndNuts extends FoodGroup{
     
     private double servNeeded;
     private double additServe;
     private double servEaten;
     private double totalServe;
-    private double calcEaten;
     private double amtNeeded;
+    private double calcEaten;
     
-    public Fruit(String group) throws IOException{
+    public MeatsAndNuts(String group) throws IOException{
         super(group);
     }
     
     public void setAmtNeeded(int age, String sex, String activity){
         if (age < 2){
-            servNeeded = .5;
+            servNeeded = 1;
             additServe = 0;
             return;
         }
@@ -32,16 +32,16 @@ public class Fruit extends FoodGroup{
                 servNeeded = 1.5;
                 additServe = 1;
             } else if (age < 11){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 3;
             } else if (age < 13){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 2.5;
             } else if (age < 18){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 2.5;
             } else if (age < 50){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 2.5;
             } else if (age < 70){
                 servNeeded = 2;
@@ -60,22 +60,22 @@ public class Fruit extends FoodGroup{
                 servNeeded = 1.5;
                 additServe = 2.5;
             }else if (age < 11){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 3;
             } else if (age < 13){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 3;
             } else if (age < 18){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 5;
             } else if (age < 50){
-                servNeeded = 2;
+                servNeeded = 3;
                 additServe = 3;
             } else if (age < 70){
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 2.5;
             } else {
-                servNeeded = 2;
+                servNeeded = 2.5;
                 additServe = 2.5;
             }
         }
@@ -94,25 +94,26 @@ public class Fruit extends FoodGroup{
                 amtNeeded = servNeeded + additServe;
                 break;
         }
+        
     }
     
     public String getAmtNeeded(double amtNeeded){
-        return super.getAmtNeeded(amtNeeded) + "of fruit.";
-    }
-    
-    public double getNeeded(){
-        return amtNeeded;
+        return super.getAmtNeeded(amtNeeded) + "of meats and nuts.";
     }
     
     public String amtRemain(double amtNeeded, double calcEaten){
         return super.amtRemain(amtNeeded, calcEaten);
     }
     
+    public double getNeeded(){
+        return amtNeeded;
+    }
+    
     public String getCalcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "Fruit.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "MeatsAndNuts.txt"));
         String read = "";
-        this.calcEaten = 0;
-        double grams = 0;
+        calcEaten = 0;
+        double grams;
         for (int i = 0; i < lines.size(); i++){
             read = lines.get(i);
             try{
@@ -122,11 +123,11 @@ public class Fruit extends FoodGroup{
             }
             calcEaten += grams;
         }
-        return "Fruit: " + calcEaten + " grams";
+        return "Meats and Nuts: " + calcEaten + " grams";
     }
     
     /*public String getCalcEaten() throws IOException{
-        return "Fruit: " + calcEaten + " grams";
+        return "Meats and Nuts: " + calcEaten + " grams";
     }*/
     
     public double getEaten() throws IOException{
