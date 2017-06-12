@@ -1,13 +1,15 @@
 #BlueJ class context
-comment0.params=user
-comment0.target=RecipeGetter(User)
-comment0.text=\r\n\ Constructor\ for\ RecipeGetter.\ It's\ passed\ user,\ and\ set's\ it's\ own\ user\ object\ to\ the\ same\ thing.\ \r\n\ It\ also\ set's\ the\ URL\r\n
-comment1.params=
-comment1.target=void\ reader()
-comment1.text=\r\n\ The\ method\ for\ reading\ the\ website.\ Gets\ recipes\ based\ on\ user's\ dietary\ preferences,\ allows\ the\ user\ to\ save\ them\ to\ a\ .txt\ file.\r\n
-comment2.params=search
-comment2.target=boolean\ recipe(java.net.URL)
-comment3.params=yes\ no\ exit
-comment3.target=RecipeGetter.Nav\ input(java.lang.String,\ java.lang.String,\ java.lang.String)
-comment3.text=\r\n\ Just\ a\ simple\ input\ method.\ Gets\ one\ of\ three\ responses\ and\ returns\ it.\r\n
-numComments=4
+comment0.target=RecipeGetter
+comment0.text=\r\n\ Get's\ recipes\ from\ the\ INTERFNEEERTTTSSSS\!\!\!\!11\!\!\r\n\ AMAZING\!\!\!\!\r\n
+comment1.params=user
+comment1.target=RecipeGetter(User)
+comment1.text=\r\n\ Constructor\ for\ RecipeGetter.\ It's\ passed\ user,\ and\ set's\ it's\ own\ user\ object\ to\ the\ same\ thing.\ \r\n\ It\ also\ set's\ the\ URL\r\n
+comment2.params=
+comment2.target=void\ reader()
+comment2.text=\r\n\ The\ method\ for\ reading\ the\ website.\ Gets\ recipes\ based\ on\ user's\ dietary\ preferences,\ allows\ the\ user\ to\ save\ them\ to\ a\ .txt\ file.\r\n
+comment3.params=search
+comment3.target=boolean\ recipe(java.net.URL)
+comment4.params=yes\ no\ exit
+comment4.target=RecipeGetter.Nav\ input(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment4.text=\r\n\ Just\ a\ simple\ input\ method.\ Gets\ one\ of\ three\ responses\ and\ returns\ it.\r\n
+numComments=5

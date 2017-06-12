@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Login
 {
-    private String username;
+    private static String username;
     
     /**
      * the Login constructor is used when the user logs in.
@@ -27,8 +27,9 @@ public class Login
                 System.out.println("Something weird happened, try again.");
             }
         }
+        
         for(int i = 0; i < password.length(); i++) {
-            realPass += password.charAt(i) -1;
+            realPass += (char)(password.charAt(i) -1);
         }
         
         while(true) {
@@ -87,7 +88,7 @@ public class Login
         return username;
     }
     
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
     

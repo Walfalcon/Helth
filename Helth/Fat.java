@@ -34,8 +34,8 @@ public class Fat extends FoodGroup{
         return super.amtRemain(amtNeeded, calcEaten);
     }
     
-    public void calcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get("Fat.txt"));
+    public String getCalcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "Fat.txt"));
         String read = "";
         calcEaten = 0;
         double grams;
@@ -48,11 +48,12 @@ public class Fat extends FoodGroup{
             }
             calcEaten += grams;
         }
-    }
-    
-    public String getCalcEaten() throws IOException{
         return "Fat: " + calcEaten + " grams";
     }
+    
+    /*public String getCalcEaten() throws IOException{
+        return "Fat: " + calcEaten + " grams";
+    }*/
     
     public double getEaten() throws IOException{
         return calcEaten;

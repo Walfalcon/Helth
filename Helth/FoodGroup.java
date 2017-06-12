@@ -3,10 +3,8 @@ import java.io.*;
 public abstract class FoodGroup {
     private double servEaten;
     private FileWriter groupings;
-    private Login login;
     public FoodGroup(String group) throws IOException{
-        this.login = new Login();
-        this.groupings = new FileWriter(group + login.getUsername() + ".txt", true);
+        this.groupings = new FileWriter(Login.getUsername() + group + ".txt", true);
     }
     
     public abstract void setAmtNeeded(int age, String sex, String activity);
@@ -23,10 +21,10 @@ public abstract class FoodGroup {
         }
     }
     
-    public abstract void calcEaten() throws IOException;
+    public abstract String getCalcEaten() throws IOException;
     
     public void setServEaten (String group, String grams2) throws IOException{
-        FileWriter groupings = new FileWriter(group + ".txt", true);
+        FileWriter groupings = new FileWriter(Login.getUsername() + group + ".txt", true);
         BufferedWriter bw = new BufferedWriter(groupings);
         bw.newLine();
         bw.write(grams2);

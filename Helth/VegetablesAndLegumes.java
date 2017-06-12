@@ -108,8 +108,8 @@ public class VegetablesAndLegumes extends FoodGroup{
         return super.amtRemain(amtNeeded, calcEaten);
     }
     
-    public void calcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get("VeggiesAndLegumes.txt"));
+    public String getCalcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "VeggiesAndLegumes.txt"));
         String read = "";
         calcEaten = 0;
         double grams;
@@ -122,11 +122,12 @@ public class VegetablesAndLegumes extends FoodGroup{
             }
             calcEaten += grams;
         }
-    }
-    
-    public String getCalcEaten() throws IOException{
         return "Vegetables and Legumes: " + calcEaten + " grams";
     }
+    
+    /*public String getCalcEaten() throws IOException{
+        return "Vegetables and Legumes: " + calcEaten + " grams";
+    }*/
     
     public double getEaten() throws IOException{
         return calcEaten;

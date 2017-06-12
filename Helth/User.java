@@ -210,7 +210,7 @@ public class User
         }
         
        
-        while(dSpec < 1 || dSpec > 7 || dSpec != 7)
+        while(dSpec < 1 || dSpec > 8 || dSpec != 8)
         {
             try
             {

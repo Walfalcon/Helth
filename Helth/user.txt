@@ -1,7 +1,7 @@
-12
-12 lbs
-12 in
+13
+100 lbs
+60 in
 male
-vegetarian
-nulldiabeticNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsNo other diet specificationsallergy: eggsallergy: eggsallergy: fish
+omnivore
+nullNo other diet specifications
 unknown

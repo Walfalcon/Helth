@@ -34,6 +34,7 @@ public class HelthMain
                     break;
                     case 2:
                     login = new Login(login.signUp());
+                    user.doWork();
                     break;
                     default:
                     System.out.println("type 1 or 2 ya big doofus");
@@ -42,8 +43,6 @@ public class HelthMain
                 System.out.println("type 1 or 2 ya big doofus");
             }
         }
-        
-        user.doWork();
         while(true){
             System.out.println("Do you want to:\n1. View Diary\n2. Get Recipes\n3. Calculate Nutrition\n4. Exit\n(Type a number)");
             
