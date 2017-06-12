@@ -210,7 +210,7 @@ public class User
         }
         
        
-        while(dSpec < 1 || dSpec > 7 || dSpec != 7)
+        while(dSpec != 8)
         {
             try
             {
@@ -250,7 +250,6 @@ public class User
                         dietSpec += "allergy: fish";
                         break;
                     case 8:
-                        dietSpec += "No other diet specifications";
                         break;
                     }        
                 }catch (InputMismatchException e){
