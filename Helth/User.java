@@ -83,7 +83,7 @@ public class User
        return read;
     }
     
-    public String getActivity()
+    public String getActivity()throws IOException
     {
         List<String> lines = Files.readAllLines(Paths.get("user.txt"));
         String read = "";
@@ -96,7 +96,7 @@ public class User
         return this.activeNum;
     }
     
-    public String getSex()
+    public String getSex()throws IOException
     {
        List<String> lines = Files.readAllLines(Paths.get("user.txt"));
        String read = "";
@@ -233,7 +233,7 @@ public class User
                 break;
         }
         
-       
+        ArrayList <String> deitSpec = new ArrayList<String>();
         while(dSpec < 1 || dSpec > 7 || dSpec != 7)
         {
             try
@@ -269,13 +269,12 @@ public class User
                         dietSpec = "allergy: fish";
                         break;
                    case 7:
-                        dietSpec = "No other diet specifications";
                         break;
                 } 
-                ArrayList deitSpec = new ArrayList();
-                System.out.println(deitSpec.size() );
+                
                 
                 deitSpec.add(dietSpec);
+                
             }catch (InputMismatchException e){
                  System.out.println("Pls...we're trying to help ur helth...let us");
                  String notDSpec = user.nextLine();                
@@ -297,18 +296,18 @@ public class User
              }
         }while(sexNum < 1 || sexNum > 2);
         
-        switch ( activeNum)
+        switch ( sexNum)
         {
             case 1:
-                activity = "male";
+                sex = "male";
                 break;
             case 2:
-                activity = "female";
+                sex = "female";
                 break;
             
         }
             
-        String fileName = "user.txt";
+        String fileName = Login.getUsername()+ "User.txt";
         
         try {
             // 
@@ -329,9 +328,11 @@ public class User
             bufferedWriter.newLine();
             bufferedWriter.write(activity);
             bufferedWriter.newLine();
-            bufferedWriter.write(activity);
+            bufferedWriter.write(sex);
             bufferedWriter.newLine();
-            //bufferedWriter.write(deitSpec);
+            for(String dietSpec: deitSpec){
+                bufferedWriter.write(dietSpec + "    ");
+            }
             bufferedWriter.newLine();
             bufferedWriter.write(dietaryPref);
             // closed files
