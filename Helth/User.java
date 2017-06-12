@@ -53,7 +53,7 @@ public class User
     //the next 8 or so methods are just getters for the particular variables
     public int getAge() throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsernameStatic() + "User.txt"));
         String read = "";
         read = lines.get(0);
         return Integer.parseInt(read);
@@ -61,7 +61,7 @@ public class User
           
     public int getWeight()throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsernameStatic() + "User.txt"));
         String read = "";
         read = lines.get(1);
         return Integer.parseInt(read);
@@ -69,7 +69,7 @@ public class User
 
     public int getHeight()throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsernameStatic() + "User.txt"));
         String read = "";
         read = lines.get(2);
         return Integer.parseInt(read);
@@ -77,7 +77,7 @@ public class User
        
     public String getDietaryPref()throws IOException
     {
-       List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
+       List<String> lines = Files.readAllLines(Paths.get(Login.getUsernameStatic() + "User.txt"));
        String read = "";
        read = lines.get(2);
        return read;
@@ -85,7 +85,7 @@ public class User
     
     public String getActivity()throws IOException
     {
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(Login.getUsernameStatic() + "User.txt"));
         String read = "";
         read = lines.get(3);
         return read;
@@ -98,7 +98,7 @@ public class User
     
     public String getSex()throws IOException
     {
-       List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "User.txt"));
+       List<String> lines = Files.readAllLines(Paths.get(Login.getUsernameStatic() + "User.txt"));
        String read = "";
        read = lines.get(4);
        return read;
@@ -306,7 +306,7 @@ public class User
             
         }
             
-        String fileName = Login.getUsername() + "User.txt";
+        String fileName = Login.getUsernameStatic() + "User.txt";
         
         try {
             // 
@@ -329,8 +329,8 @@ public class User
             bufferedWriter.newLine();
             bufferedWriter.write(sex);
             bufferedWriter.newLine();
-            for(String dietSpec: deitSpec){
-                bufferedWriter.write(dietSpec + "    ");
+            for(int i = 0; i < dietSpec.length(); i++){
+                bufferedWriter.write(dietSpec.charAt(i));
             }
             bufferedWriter.newLine();
             bufferedWriter.write(dietaryPref);

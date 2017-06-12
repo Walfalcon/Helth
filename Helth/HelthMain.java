@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class HelthMain
 {
-    private static User user = new User();
+    public static User user = new User();
     private static Diary diary;
     private static RecipeGetter recipeGet = new RecipeGetter(user);
     public static Login login = null;

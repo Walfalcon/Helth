@@ -88,6 +88,10 @@ public class Login
         return username;
     }
     
+    public static String getUsernameStatic() {
+        return HelthMain.login.getUsername();
+    }
+    
     public String getUsername() {
         return username;
     }

@@ -138,13 +138,13 @@ public class Diary{
     
     //tell user how much of a food group left they should eat
     public String dietRec() throws IOException{
-        fruit.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
-        meat.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
-        grain.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
-        dairy.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
-        veggie.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
-        fat.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
-        sugar.setAmtNeeded(User.getAge(), User.getSex(), User.getActivity());
+        fruit.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        meat.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        grain.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        dairy.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        veggie.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        fat.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
+        sugar.setAmtNeeded(HelthMain.user.getAge(), HelthMain.user.getSex(), HelthMain.user.getActivity());
         String dietRec = "";
         dietRec += "Fruit: " + fruit.amtRemain(fruit.getNeeded(), fruit.getEaten()) + "\n";
         dietRec += "Meat and Nuts: " + meat.amtRemain(meat.getNeeded(), meat.getEaten()) + "\n";
