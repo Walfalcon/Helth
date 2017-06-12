@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.util.ArrayList;
 /**
  * 
  * @author LNM
@@ -58,29 +59,54 @@ public class User
         return Integer.parseInt(read);
     }
           
-    public int getWeight()
+    public int getWeight()throws IOException
     {
-        return this.weight;
+        List<String> lines = Files.readAllLines(Paths.get("user.txt"));
+        String read = "";
+        read = lines.get(1);
+        return Integer.parseInt(read);
     }
 
-    public int getHeight()
+    public int getHeight()throws IOException
     {
-        return this.height;
+        List<String> lines = Files.readAllLines(Paths.get("user.txt"));
+        String read = "";
+        read = lines.get(2);
+        return Integer.parseInt(read);
     }
        
-    public String getDietaryPref()
+    public String getDietaryPref()throws IOException
     {
-        return this.dietaryPref;
+       List<String> lines = Files.readAllLines(Paths.get("user.txt"));
+       String read = "";
+       read = lines.get(2);
+       return read;
     }
     
     public String getActivity()
     {
-        return this.activity;
+        List<String> lines = Files.readAllLines(Paths.get("user.txt"));
+        String read = "";
+        read = lines.get(3);
+        return read;
     }
        
     public int getActiveNum()
     {
         return this.activeNum;
+    }
+    
+    public String getSex()
+    {
+       List<String> lines = Files.readAllLines(Paths.get("user.txt"));
+       String read = "";
+       read = lines.get(4);
+       return read;
+    }
+    
+    public int getSexNum()
+    {
+        return this.sexNum;
     }
     
     public String getDietSpec()
@@ -93,15 +119,6 @@ public class User
         return this.dSpec;
     }
     
-    public String getSex()
-    {
-        return this.sex;
-    }
-    
-    public int getSexNum()
-    {
-        return this.sexNum;
-    }
     
      //age,weight,height, pref, activity, sex
     public void doWork()
@@ -217,7 +234,7 @@ public class User
         }
         
        
-        while(dSpec < 1 || dSpec > 7 || dSpec == 7)
+        while(dSpec < 1 || dSpec > 7 || dSpec != 7)
         {
             try
             {
@@ -230,34 +247,37 @@ public class User
                 System.out.println("Enter 6: allergy: fish");                
                 System.out.println("Enter 7: No other diet specifications");
                 
-                //http://www.webmd.com/allergies/food-triggers
                 dSpec = user.nextInt();
                     switch( dSpec)
                 {
                     case 1:
                         dietSpec = "gluten Free";
-                        
+                        break;
                     case 2:
                         dietSpec = "lactose intolerant";
-                        
+                        break;
                     case 3:
                         dietSpec = "diabetic";
-                        
+                        break;
                     case 4:
                         dietSpec = "allergy: nut";
-                        
+                        break;
                    case 5:
                         dietSpec = "allergy: eggs";
-                       
+                        break;
                    case 6:
                         dietSpec = "allergy: fish";
-                        
+                        break;
                    case 7:
                         dietSpec = "No other diet specifications";
                         break;
-                    }        
-                }catch (InputMismatchException e){
-                 System.out.println("Incorrect input");
+                } 
+                ArrayList deitSpec = new ArrayList();
+                System.out.println(deitSpec.size() );
+                
+                deitSpec.add(dietSpec);
+            }catch (InputMismatchException e){
+                 System.out.println("Pls...we're trying to help ur helth...let us");
                  String notDSpec = user.nextLine();                
             }
             
@@ -309,11 +329,11 @@ public class User
             bufferedWriter.newLine();
             bufferedWriter.write(activity);
             bufferedWriter.newLine();
+            bufferedWriter.write(activity);
+            bufferedWriter.newLine();
+            //bufferedWriter.write(deitSpec);
+            bufferedWriter.newLine();
             bufferedWriter.write(dietaryPref);
-            bufferedWriter.newLine();
-            bufferedWriter.write(dietSpec);
-            bufferedWriter.newLine();
-            bufferedWriter.write(sex);
             // closed files
             bufferedWriter.close();
         }
@@ -321,9 +341,7 @@ public class User
             System.out.println(
                 "Error writing to file '" + user);     
         }
-        
-       
-        
+
     }
 }
   
