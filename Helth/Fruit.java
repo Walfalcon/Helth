@@ -108,11 +108,11 @@ public class Fruit extends FoodGroup{
         return super.amtRemain(amtNeeded, calcEaten);
     }
     
-    public void calcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get("Fruit.txt"));
+    public String getCalcEaten() throws IOException{
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "Fruit.txt"));
         String read = "";
         this.calcEaten = 0;
-        double grams;
+        double grams = 0;
         for (int i = 0; i < lines.size(); i++){
             read = lines.get(i);
             try{
@@ -122,11 +122,12 @@ public class Fruit extends FoodGroup{
             }
             calcEaten += grams;
         }
-    }
-    
-    public String getCalcEaten() throws IOException{
         return "Fruit: " + calcEaten + " grams";
     }
+    
+    /*public String getCalcEaten() throws IOException{
+        return "Fruit: " + calcEaten + " grams";
+    }*/
     
     public double getEaten() throws IOException{
         return calcEaten;

@@ -27,11 +27,11 @@ public class Login
                 System.out.println("Something weird happened, try again.");
             }
         }
+        
         for(int i = 0; i < password.length(); i++) {
             realPass += (char)(password.charAt(i) -1);
         }
         
-                    System.out.print(realPass);
         while(true) {
             System.out.println("\nPassword: ");
             if(in.nextLine().equals(realPass)) {
