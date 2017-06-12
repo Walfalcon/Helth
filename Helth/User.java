@@ -285,7 +285,7 @@ public class User
             
         }
             
-        String fileName = "user.txt";
+        String fileName = Login.getUsername() + "User.txt";
         
         try {
             // 

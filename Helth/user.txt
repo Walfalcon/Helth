@@ -1,7 +1,0 @@
-13
-100 lbs
-60 in
-male
-omnivore
-nullNo other diet specifications
-unknown
