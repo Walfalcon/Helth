@@ -107,7 +107,7 @@ public class Grain extends FoodGroup{
     }
     
     public String getCalcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "Grain.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "Grain.txt"));
         String read = "";
         calcEaten = 0;
         double grams;

@@ -14,7 +14,7 @@ public class HelthMain
     private static User user = new User();
     private static Diary diary;
     private static RecipeGetter recipeGet = new RecipeGetter(user);
-    private static Login login = null;
+    public static Login login = null;
     
     private enum Menu { //for use by the input method
         DIARY, GET_RECIPE, CALCULATOR, EXIT;
@@ -62,7 +62,6 @@ public class HelthMain
                 }
                 break;
                 case CALCULATOR:
-                Calculator.whatever();
                 System.out.println("LOL joke's on you there is no calculator!");
                 break;
                 case EXIT:

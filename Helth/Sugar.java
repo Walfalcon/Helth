@@ -35,7 +35,7 @@ public class Sugar extends FoodGroup{
     }
     
     public String getCalcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "Sugar.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "Sugar.txt"));
         String read = "";
         calcEaten = 0;
         double grams;

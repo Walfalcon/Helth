@@ -109,7 +109,7 @@ public class VegetablesAndLegumes extends FoodGroup{
     }
     
     public String getCalcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "VeggiesAndLegumes.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "VeggiesAndLegumes.txt"));
         String read = "";
         calcEaten = 0;
         double grams;

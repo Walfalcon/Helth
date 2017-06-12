@@ -4,7 +4,7 @@ public abstract class FoodGroup {
     private double servEaten;
     private FileWriter groupings;
     public FoodGroup(String group) throws IOException{
-        this.groupings = new FileWriter(Login.getUsername() + group + ".txt", true);
+        this.groupings = new FileWriter(HelthMain.login.getUsername() + group + ".txt", true);
     }
     
     public abstract void setAmtNeeded(int age, String sex, String activity);
@@ -24,7 +24,7 @@ public abstract class FoodGroup {
     public abstract String getCalcEaten() throws IOException;
     
     public void setServEaten (String group, String grams2) throws IOException{
-        FileWriter groupings = new FileWriter(Login.getUsername() + group + ".txt", true);
+        FileWriter groupings = new FileWriter(HelthMain.login.getUsername() + group + ".txt", true);
         BufferedWriter bw = new BufferedWriter(groupings);
         bw.newLine();
         bw.write(grams2);

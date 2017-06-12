@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Login
 {
-    private static String username;
+    private String username;
     
     /**
      * the Login constructor is used when the user logs in.
@@ -88,7 +88,7 @@ public class Login
         return username;
     }
     
-    public static String getUsername() {
+    public String getUsername() {
         return username;
     }
     

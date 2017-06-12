@@ -77,6 +77,7 @@ dependency8.type=UsesDependency
 dependency9.from=FoodGroup
 dependency9.to=Login
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 objectbench.height=93
 objectbench.width=764
 package.editor.height=393
@@ -85,6 +86,16 @@ package.editor.x=715
 package.editor.y=292
 package.numDependencies=26
 package.numTargets=18
+=======
+objectbench.height=76
+objectbench.width=658
+package.editor.height=400
+package.editor.width=560
+package.editor.x=803
+package.editor.y=137
+package.numDependencies=17
+package.numTargets=17
+>>>>>>> refs/remotes/origin/master
 package.showExtends=true
 package.showUses=true
 project.charset=UTF-8
@@ -128,39 +139,49 @@ target11.x=10
 target11.y=190
 target12.editor.height=700
 target12.editor.width=900
+<<<<<<< HEAD
 target12.editor.x=862
 target12.editor.y=106
+=======
+target12.editor.x=0
+target12.editor.y=0
+>>>>>>> refs/remotes/origin/master
 target12.height=50
-target12.name=Calculator
-target12.naviview.expanded=true
+target12.name=Dairy
 target12.showInterface=false
 target12.type=ClassTarget
 target12.typeParameters=
 target12.width=80
-target12.x=10
+target12.x=230
 target12.y=130
 target13.editor.height=1056
 target13.editor.width=1936
 target13.editor.x=-8
 target13.editor.y=-8
 target13.height=50
+<<<<<<< HEAD
 target13.name=Dairy
 target13.naviview.expanded=true
+=======
+target13.name=Fat
+>>>>>>> refs/remotes/origin/master
 target13.showInterface=false
 target13.type=ClassTarget
 target13.typeParameters=
 target13.width=80
-target13.x=230
-target13.y=130
-target14.editor.height=700
-target14.editor.width=900
-target14.editor.x=0
+target13.x=300
+target13.y=200
+target14.editor.height=1040
+target14.editor.width=960
+target14.editor.x=960
 target14.editor.y=0
 target14.height=50
-target14.name=Fat
+target14.name=RecipeGetter
+target14.naviview.expanded=true
 target14.showInterface=false
 target14.type=ClassTarget
 target14.typeParameters=
+<<<<<<< HEAD
 target14.width=80
 target14.x=320
 target14.y=230
@@ -168,12 +189,22 @@ target15.editor.height=1056
 target15.editor.width=1936
 target15.editor.x=-8
 target15.editor.y=-8
+=======
+target14.width=100
+target14.x=330
+target14.y=80
+target15.editor.height=1040
+target15.editor.width=960
+target15.editor.x=999
+target15.editor.y=1
+>>>>>>> refs/remotes/origin/master
 target15.height=50
-target15.name=RecipeGetter
+target15.name=HelthMain
 target15.naviview.expanded=true
 target15.showInterface=false
 target15.type=ClassTarget
 target15.typeParameters=
+<<<<<<< HEAD
 target15.width=100
 target15.x=330
 target15.y=80
@@ -181,27 +212,37 @@ target16.editor.height=1056
 target16.editor.width=1936
 target16.editor.x=-8
 target16.editor.y=-8
+=======
+target15.width=80
+target15.x=70
+target15.y=10
+target16.editor.height=700
+target16.editor.width=900
+target16.editor.x=0
+target16.editor.y=0
+>>>>>>> refs/remotes/origin/master
 target16.height=50
-target16.name=HelthMain
-target16.naviview.expanded=true
+target16.name=Sugar
 target16.showInterface=false
 target16.type=ClassTarget
 target16.typeParameters=
 target16.width=80
-target16.x=70
-target16.y=10
+target16.x=110
+target16.y=250
 target17.editor.height=700
 target17.editor.width=900
-target17.editor.x=0
-target17.editor.y=0
+target17.editor.x=456
+target17.editor.y=167
 target17.height=50
-target17.name=Sugar
+target17.name=saveUser
+target17.naviview.expanded=true
 target17.showInterface=false
 target17.type=ClassTarget
 target17.typeParameters=
 target17.width=80
-target17.x=110
+target17.x=200
 target17.y=250
+<<<<<<< HEAD
 target18.editor.height=700
 target18.editor.width=900
 target18.editor.x=456
@@ -219,6 +260,12 @@ target2.editor.height=1056
 target2.editor.width=1936
 target2.editor.x=-8
 target2.editor.y=-8
+=======
+target2.editor.height=1040
+target2.editor.width=960
+target2.editor.x=960
+target2.editor.y=0
+>>>>>>> refs/remotes/origin/master
 target2.height=50
 target2.name=User
 target2.naviview.expanded=true
@@ -254,10 +301,17 @@ target4.typeParameters=
 target4.width=80
 target4.x=340
 target4.y=10
+<<<<<<< HEAD
 target5.editor.height=1056
 target5.editor.width=1936
 target5.editor.x=-8
 target5.editor.y=-8
+=======
+target5.editor.height=1040
+target5.editor.width=960
+target5.editor.x=0
+target5.editor.y=0
+>>>>>>> refs/remotes/origin/master
 target5.height=50
 target5.name=Login
 target5.naviview.expanded=true

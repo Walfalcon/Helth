@@ -21,7 +21,7 @@ public class Diary{
     
     //creates each foodgroup and creates a diary
     public Diary() throws IOException{
-        this.fileName = Login.getUsername() + "Diary" + ".txt";
+        this.fileName = HelthMain.login.getUsername() + "Diary" + ".txt";
         this.user = new Scanner(System.in);
         this.diary = new FileWriter(fileName, true);
         this.fruit = new Fruit("Fruit");

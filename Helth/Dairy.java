@@ -110,7 +110,7 @@ public class Dairy extends FoodGroup{
     }
     
     public String getCalcEaten() throws IOException{
-        List<String> lines = Files.readAllLines(Paths.get(Login.getUsername() + "Dairy.txt"));
+        List<String> lines = Files.readAllLines(Paths.get(HelthMain.login.getUsername() + "Dairy.txt"));
         String read = "";
         calcEaten = 0;
         double grams;
