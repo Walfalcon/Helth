@@ -13,6 +13,7 @@ public class HelthMain
 {
     private static User user = new User();
     private static Diary diary;
+    private static Calculator calc = new Calculator();
     private static RecipeGetter recipeGet = new RecipeGetter(user);
     private static Login login = null;
     
@@ -63,6 +64,7 @@ public class HelthMain
                 }
                 break;
                 case CALCULATOR:
+                calc.start();
                 System.out.println("LOL joke's on you there is no calculator!");
                 break;
                 case EXIT:
